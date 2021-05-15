@@ -16,7 +16,24 @@ use App\Http\Controllers\DashboardController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/dashboard',function(){
-    return view('dashboard.accountdashboard');
+// Route::get('/dashboard',function(){
+//     return view('dashboard.accountdashboard');
+// });
+
+// Route::group(['middleware' => ['auth']], function() { 
+//     Route::get('/dashboard', [DashboardController::class,'index']);
+// });
+
+Route::get('/dashboard', [DashboardController::class,'dashboard']);
+
+
+Route::middleware('auth')->group(function(){
+    Route::get('/home',[DashboardController::class,'index']);
 });
-Route::get('/caretaker',[DashboardController::class,'registerCaretaker']);
+/** care taker routes */
+//route to register the caretaker
+Route::get('/caretaker',[DashboardController::class,'loginCareTaker']);
+
+//route to login the caretaker
+Route::get('/caretakerRegister', [DashboardController::class,'registerCaretaker']);
+

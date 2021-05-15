@@ -31,6 +31,10 @@ return [
             'payments' => 'c,r,u',
             'profile' => 'r,u',
         ],
+        'occupant' => [
+            'payments' => 'c,r,u',
+            'profile' => 'r,u',
+        ],
         'user' => [
             'profile' => 'r,u',
         ]
