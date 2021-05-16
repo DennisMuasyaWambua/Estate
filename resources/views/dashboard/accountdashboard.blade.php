@@ -9,7 +9,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="card-user" href="{{route('register')}}">
+                <a class="card-user" href="/user">
                     <div class="card__background" style="background-image:url({{url('images/smile.jpg')}});">
                         <div class="card__content">
                            <h3 class="card__heading">User</h3>

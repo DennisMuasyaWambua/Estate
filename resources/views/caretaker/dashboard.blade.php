@@ -7,6 +7,19 @@
     <title>caretaker</title>
 </head>
 <body>
-    {{caretaker}}
+  
+        @auth     
+            <li class="nav-item"><a href="{{ route('logout') }}" class="nav-link underline"onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a></li>
+            <form id="logout-form" method="POST" action="{{route('logout')}}" >@csrf</form>
+        @endauth
+    <p>caretaker</p>
+   
+    @foreach ($users as $user) 
+        <td>{{$user->name}}</td>
+        <td>{{$user->email}}</td>
+    
+    @endforeach
+
+  
 </body>
 </html>

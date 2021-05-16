@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CaretakerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,12 +29,14 @@ Route::get('/dashboard', [DashboardController::class,'dashboard']);
 
 
 Route::middleware('auth')->group(function(){
-    Route::get('/home',[DashboardController::class,'index']);
+    Route::get('/dash',[DashboardController::class,'index']);
+    Route::get('/dash',[CaretakerController::class,'caretakerIndex']);
 });
 /** care taker routes */
-//route to register the caretaker
 Route::get('/caretaker',[DashboardController::class,'loginCareTaker']);
-
-//route to login the caretaker
 Route::get('/caretakerRegister', [DashboardController::class,'registerCaretaker']);
+
+/**Normal user login */
+Route::get('/user',[DashboardController::class,'userLogin']);
+Route::get('/userRegister',[DashboardController::class,'userRegister']);
 

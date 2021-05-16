@@ -30,7 +30,8 @@
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
                     <li class="nav-item"><a href="{{ url('/home') }}" class="nav-link underline">Home</a></li>
-                    <li class="nav-item"><a href="{{ route('logout') }}" class="nav-link underline">Logout</a></li>
+                    <li class="nav-item"><a href="{{ route('logout') }}" class="nav-link underline"onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a></li>
+                    <form id="logout-form" method="POST" action="{{route('logout')}}" >@csrf</form>
                     @else
                     <li class="nav-item"><a href="/dashboard" class="nav-link underline">Log in</a></li>
 
