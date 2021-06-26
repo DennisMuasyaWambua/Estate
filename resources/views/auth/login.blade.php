@@ -26,7 +26,7 @@
                                 @enderror
                             </div>
                             <input name="login" id="login" class="btn btn-block login-btn mb-4" type="submit" value="Login">
-                            <a id="register-link" href="/register"><small>Joinig us today?</small></a>
+                            <a id="register-link" href="/register"><small>Joining us today?</small></a>
 
                 </form>
            

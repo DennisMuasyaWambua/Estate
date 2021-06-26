@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class caretaker extends Model
 {
     use HasFactory;
+
+    //make users occupants
+    public function makeUsersOccupants(){}
+
+    //remove occupants
+    public function removeOccupants(){}
 }

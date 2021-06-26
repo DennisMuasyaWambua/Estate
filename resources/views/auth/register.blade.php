@@ -17,14 +17,13 @@
             </div>
 
             <div class="form-group">
-                <label class="form-control" for="email"  id="email" >email</label>
-                <input name="email" type="email" class="form-control is-invalid" placeholder="email" > 
+                <label class="form-control" for="email"  id="email" >Email</label>
+                <input name="email" type="email" class="form-control is-invalid" placeholder="email"> 
                 @error('email')
                     <span class="invalid-feedback is-invalid" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-
             </div>
 
             <div class="form-group">
@@ -46,7 +45,15 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
- 
+            </div>
+            <div class="form-group">
+                <label for="role_id" class="form-control" id="role_id">Register as:
+                    <select name="role_id" id="caretaker-role">
+                        <option value="admin">admin</option>
+                        <option value="user">user</option>
+                        <option value="caretaker">caretaker</option>
+                    </select>
+                </label>
             </div>
             <input name="register" id="register" class="btn btn-block login-btn mb-4" type="submit" value="Register">
             <div class="redirection">
