@@ -16,9 +16,9 @@ class OccupantsController extends Controller
      */
     public function index()
     {
-        // ->with('occupants',$occupants)
-        $occupants = occupants::all();
-        return view('caretaker.dashboard')->with('occupants',$occupants);
+       $occupants = occupants::all();
+       
+      return view("caretaker.dashboard")->with("occupants",$occupants);
     }
 
     /**
@@ -71,13 +71,13 @@ class OccupantsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\occupants  $occupants
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(occupants $occupants)
+    public function show($id)
     {
         //
-       $occupants = occupants::all();
+       $occupants = occupants::find($id);
        return view('caretaker.dashboard')->with('occupants',$occupants);
     }
 
@@ -98,12 +98,13 @@ class OccupantsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\occupants  $occupants
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, occupants $occupants)
+    public function update(Request $request, $id)
     {
         //
+
     }
 
     /**
