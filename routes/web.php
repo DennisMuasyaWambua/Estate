@@ -40,8 +40,6 @@ Route::middleware(['auth','role:caretaker'])->prefix('Dashboard')->group(functio
     Route::post('/deleteOccupant/{id}',[OccupantsController::class,'destroy'])->name('Dashboard.deleteOccupant');
     Route::post('/updateOccupant/{id}',[OccupantsController::class,'edit'])->name('Dashboard.updateOccupant');
     Route::get('/editOccupant/{id}',[OccupantsController::class,'show'])->name('Dashboard.editOccupant');
-  
-    //Route::get('',[CaretakerController::class,'index']);
 });
 // Route::middleware('auth')->group(function(){
 //     Route::get('/Dashboard',[DashboardController::class,'index']);

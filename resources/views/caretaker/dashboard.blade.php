@@ -138,7 +138,8 @@
                                                     <td>{{$occupant['flatNumber']}}</td>
                                                     <td>
                                                         <a class="btn btn-sm btn-primary" type="button" href="{{route('Dashboard.updateOccupant',$occupant->id)}}"data-bs-toggle="modal"data-bs-target="#occupancyModal">Update</a>
-                                                        <a class="btn btn-sm btn-danger" type="button" href="{{route('Dashboard.deleteOccupant',$occupant->id)}}"data-bs-toggle="modal"data-bs-target="#occupancyModal">Delete</a>
+                                                        <button type="button" class="btn btn-sm btn-danger"onclick="event.preventDefault();document.getElementById('delete-occupant-form-{{$occupant->id}}').submit()">Delete</button>
+                                                        <form id="delete-occupant-form-{{$occupant->id}}" action="{{route('Dashboard.deleteOccupant',$occupant->id)}}"method="POST" style="display:none;">@csrf</form>
                                                     </td>
                                                 </tr>
                                             @endforeach
