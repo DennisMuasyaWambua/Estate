@@ -89,7 +89,7 @@
                     >
                         <div class="bills-overlay"></div>
                         <div class="bills-circle">
-                        <img src="bank.png" alt="" />
+                        <img src="{{asset('images/bank.png')}}" alt="" />
                         <p>Set service charge payment date</p>
                         </div>
                     </a>
@@ -111,8 +111,7 @@
                 </div>
                 <div class="modal-body">
                         <div id="table">
-                            <form action="{{route('Dashboard.allOccupants')}}" method='POST'>
-                                @csrf
+                                <form action="{{route('Dashboard.allOccupants')}}" method="POST">
                                     <table class="table">
                                         <thead class="table-dark">
                                             <a class="btn btn-sm btn-success"role="button"style="float:right;margin-bottom:5px;padding:5px;"data-bs-toggle="modal"data-bs-target="#addOccupant">create occupant</a>
@@ -128,78 +127,25 @@
                                             </tr>
                                         </thead>
                                         <tbody class="table-dark">
-                                        @foreach($occupants as $occupant)
-                                            <tr>
-                                                    <td>{{$occupant->id}}</td>
-                                                    <td>{{$occupant->name}}</td>
-                                                    <td>{{$occupant->email}}</td>
-                                                    <td>{{$occupant->phone}}</td>
-                                                    <td>{{$occupant->estate}}</td>
-                                                    <td>{{$occupant->blockNumber}}</td>
-                                                    <td>{{$occupant->flatNumber}}</td>
+                                            @foreach($occupants as $occupant)
+                                                <tr>
+                                                    <td>{{$occupant['id']}}</td>
+                                                    <td>{{$occupant['name']}}</td>
+                                                    <td>{{$occupant['email']}}</td>
+                                                    <td>{{$occupant['phone']}}</td>
+                                                    <td>{{$occupant['estate']}}</td>
+                                                    <td>{{$occupant['blockNumber']}}</td>
+                                                    <td>{{$occupant['flatNumber']}}</td>
                                                     <td>
-                                                        <a class="btn btn-sm btn-primary" href="{{url('Dashboard/editOccupant/$occupant->id')}}" data-bs-toogle="modal" data-bs-target="#editOccupant"  role="button">Update</a>
-                                                        <button class="btn btn-sm btn-danger" onclick="event.preventDefault();document.getElementById('delete-occupant-{{$occupant->id}}').submit();"  role="button">Delete</button>
-
-                                                        <form id="delete-occupant-{{$occupant->id}}" action="{{route('Dashboard.deleteOccupant',$occupant->id)}}" method="POST" style="display:none ">
-                                                        @csrf
-                                                        </form>
+                                                        <a class="btn btn-sm btn-primary" type="button" href="{{route('Dashboard.updateOccupant',$occupant->id)}}"data-bs-toggle="modal"data-bs-target="#occupancyModal">Update</a>
+                                                        <a class="btn btn-sm btn-danger" type="button" href="{{route('Dashboard.deleteOccupant',$occupant->id)}}"data-bs-toggle="modal"data-bs-target="#occupancyModal">Delete</a>
                                                     </td>
-                                            </tr>
-                                        @endforeach
-                                            <!-- Edit user  -->
-                                                    <div class="modal fade" id="editOccupant" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Edit {{$occupant->name}}</h5>
-                                                                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <form action="{{route('Dashboard.editOccupant',$occupant->id)}}"method="POST">
-                                                                        @csrf
-                                                                        <div class="form-group">
-                                                                            <input hidden="true" value="{{auth()->user()->id}}" name="caretakerId">
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="name">Name</label>
-                                                                            <input class="form-control" value="{{$occupant->name}}"type="text" name="name" placeholder="Occupant's name" autofocus>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="email">Email</label>
-                                                                            <input class="form-control" type="email" value="{{$occupant->email}}" name="email" placeholder="email" >
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="phone">Phone</label>
-                                                                            <input class="form-control" type="number" vlaue="{{$occupant->phone}}" name="phone" placeholder="phone" value="+254" >
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="estate">Estate</label>
-                                                                            <input class="form-control" type="text" value="{{$occupant->estate}}" name="estate" placeholder="estate" >
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="name">Block Number</label>
-                                                                            <input class="form-control" type="text" value="{{$occupant->blockNumber}}" name="blockNumber" placeholder="block number" >
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="flatNumber">Flat Number</label>
-                                                                            <input class="form-control" type="text" name="flatNumber" value="{{$occupant->flatNumber}}" placeholder="flat number" >
-                                                                        </div>
-
-                                                                        <button class="btn btn-sm btn-primary"style="float:right;padding:5px;margin-top:5px;" type="submit">Edit occupant</button>
-                                                                    </form>
-                                                                </div>
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-            
-                                      
-                                            
-
+                                                </tr>
+                                            @endforeach
+                                                                                 
                                         </tbody>
-                                </table>
-                            </form>
+                                    </table>
+                                </form>
                             </div>
                         </div>
                         

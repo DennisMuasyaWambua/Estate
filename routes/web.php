@@ -47,9 +47,7 @@ Route::middleware(['auth','role:caretaker'])->prefix('Dashboard')->group(functio
 //     Route::get('/Dashboard',[DashboardController::class,'index']);
 //     Route::get('/Dashboard',[CaretakerController::class,'index']);
 // });
-/** care taker routes */
-Route::get('/caretaker',[DashboardController::class,'loginCareTaker']);
-Route::get('/caretakerRegister', [DashboardController::class,'registerCaretaker']);
+
 
 /**Normal user login */
 Route::get('/user',[DashboardController::class,'userLogin']);

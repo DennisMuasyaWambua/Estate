@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\occupants;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class OccupantsController extends Controller
@@ -16,9 +17,9 @@ class OccupantsController extends Controller
      */
     public function index()
     {
-       $occupants = occupants::all();
-       
-      return view("caretaker.dashboard")->with("occupants",$occupants);
+      $occupants = occupants::all();
+      //dd($occupants);
+     return view('caretaker.dashboard',['occupants'=>$occupants]);
     }
 
     /**
@@ -123,6 +124,6 @@ class OccupantsController extends Controller
 
     public function occupants(){
         $occupants = occupants::all();
-        return view('caretaker.dashboard')->with('occupants',$occupants);
+        return view('Dashboard.allOccupants',compact('occupants',$occupants));
     }
 }
