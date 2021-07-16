@@ -138,9 +138,31 @@
                                                     <td>{{$occupant['flatNumber']}}</td>
                                                     <td>
                                                         <a class="btn btn-sm btn-primary" type="button" href="{{route('Dashboard.updateOccupant',$occupant->id)}}"data-bs-toggle="modal"data-bs-target="#occupancyModal">Update</a>
-                                                        <button type="button" class="btn btn-sm btn-danger"onclick="event.preventDefault();document.getElementById('delete-occupant-form-{{$occupant->id}}').submit()">Delete</button>
-                                                        <form id="delete-occupant-form-{{$occupant->id}}" action="{{route('Dashboard.deleteOccupant',$occupant->id)}}"method="POST" style="display:none;">@csrf</form>
+                                                        <button class="btn btn-sm btn-danger" onclick="event.preventDefault();document.getElementById('delete-{{$occupant->id}}').submit()"data-bs-toggle="modal"data-bs-target="#delete">Delete</button>
                                                     </td>
+                                                    <!-- delete modal -->
+                                                    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLongTitle">Delete</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form id="delete-{{$occupant->id}}" action="{{route('Dashboard.editOccupant',$occupant->id)}}" method="GET">@csrf
+                                                                        <p>Are you sure you want to delete{{$occupant->name}}</p>
+                                                                    </form>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-sm btn-danger"onclick="event.preventDefault();document.getElementById('delete-occupant-form-{{$occupant->id}}').submit()">Delete</button>
+                                                                    <form id="delete-occupant-form-{{$occupant->id}}" action="{{route('Dashboard.deleteOccupant',$occupant->id)}}"method="POST" style="display:none;">@csrf</form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </tr>
                                             @endforeach
                                                                                  
