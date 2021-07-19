@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\occupants;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,8 +16,7 @@ class OccupantsController extends Controller
     public function index()
     {
        $occupants = occupants::all();
-       
-      return view("caretaker.dashboard")->with("occupants",$occupants);
+      return view('caretaker.dashboard',compact('occupants'));
     }
 
     /**
@@ -75,10 +73,9 @@ class OccupantsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-       $occupants = occupants::find($id);
-       return view('caretaker.dashboard')->with('occupants',$occupants);
+    {   
+        $occupant = occupants::find($id);
+        return redirect(route('Dashboard.allOccupants',compact('occupant')));
     }
 
     /**
@@ -90,8 +87,10 @@ class OccupantsController extends Controller
     public function edit($id)
     {
         //
-        $occupants = occupants::find($id);
-        return view('caretaker.dashboard')->with('occupants',$occupants);
+        $occupants = occupants::all();
+        $occupant = $occupants->find($id);
+        //dd($occupant);
+        return view('caretaker.dashboard',compact('occupant'));
     }
 
     /**
@@ -104,6 +103,16 @@ class OccupantsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $occupants = occupants::all();
+        $occupant = $occupants->find($id);
+        $occupant->name = $request->name;
+        $occupant->email = $request->email;
+        $occupant->phone = $request->phone;
+        $occupant->estate = $requset->estate;
+        $occupant->blockNumber = $request->blockNumber;
+        $occupant->flatNumber = $request->flatNumber;
+        $occupant->save();
+        return redirect(route('Dashboard.allOccupants'));
 
     }
 
