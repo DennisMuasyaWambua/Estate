@@ -140,52 +140,12 @@
                                                     <td>{{$occupant['flatNumber']}}</td> 
                                                     <!-- actions on the occupant -->
                                                         <td>
-                                                            <a class="btn btn-sm btn-primary" type="button" data-bs-toggle="modal"data-bs-target="#exampleModalCenter">Update</a>
+                                                            <a class="btn btn-sm btn-primary" href="{{route('Dashboard.showOccupant',$occupant->id)}}" >Update</a>
                                                             <button class="btn btn-sm btn-danger"onclick="event.preventDefault();document.getElementById('delete-user-form-{{$occupant->id}}').submit()"data-bs-toggle="modal"data-bs-target="#delete">Delete</button>
                                                             <form id="delete-user-form-{{$occupant->id}}" action="{{route('Dashboard.deleteOccupant',$occupant->id)}}" method="POST">@csrf</form>
                                                         </td>
                                                     <!-- Action modals -->
-                                                        <!-- Update modal -->
-                                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLongTitle">Update </h5>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <form action="{{route('Dashboard.showOccupant',$occupant->id)}}" method="POST">
-                                                                            @csrf
-                                                                            <div class="form-control">
-                                                                                <label for="name">Name</label>
-                                                                                <input type="text" value="{{$occupant->name}}">
-                                                                            </div>
-                                                                            <div class="form-control">
-                                                                                <label for="email">Email</label>
-                                                                            </div>
-                                                                            <div class="form-control">
-                                                                                <label for="phone">Phone Number</label>
-                                                                            </div>
-                                                                            <div class="form-control">
-                                                                                <label for="estate">Estate</label>
-                                                                            </div>
-                                                                            <div class="form-control">
-                                                                                <label for="blockNumber">Block Number</label>
-                                                                            </div>
-                                                                            <div class="form-control">
-                                                                                <label for="flatNumber">Flat Number</label>
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        
                                                         <!-- Delete modal -->
                                                     
                                                 </tr>     

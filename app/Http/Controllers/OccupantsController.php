@@ -74,8 +74,8 @@ class OccupantsController extends Controller
      */
     public function show($id)
     {   
-        $occupant = occupants::find($id);
-        return redirect(route('Dashboard.allOccupants',compact('occupant')));
+        $person = occupants::find($id);
+       return view('partials.update',compact('person'));
     }
 
     /**
