@@ -78,6 +78,11 @@ class OccupantsController extends Controller
        return view('partials.update',compact('person'));
     }
 
+    public function deleteShow($id){
+        $delete = occupants::find($id);
+        return view('partials.delete',compact('delete'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -97,21 +102,19 @@ class OccupantsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
-        $occupants = occupants::all();
-        $occupant = $occupants->find($id);
-        $occupant->name = $request->name;
-        $occupant->email = $request->email;
-        $occupant->phone = $request->phone;
-        $occupant->estate = $requset->estate;
-        $occupant->blockNumber = $request->blockNumber;
-        $occupant->flatNumber = $request->flatNumber;
-        $occupant->save();
+        $person = occupants::find($request->id);
+        $person->name = $request->name;
+        $person->email = $request->email;
+        $person->phone = $request->phone;
+        $person->estate = $request->estate;
+        $person->blockNumber = $request->blockNumber;
+        $person->flatNumber = $request->flatNumber;
+        $person->save();
         return redirect(route('Dashboard.allOccupants'));
 
     }

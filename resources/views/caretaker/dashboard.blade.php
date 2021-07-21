@@ -141,12 +141,10 @@
                                                     <!-- actions on the occupant -->
                                                         <td>
                                                             <a class="btn btn-sm btn-primary" href="{{route('Dashboard.showOccupant',$occupant->id)}}" >Update</a>
-                                                            <button class="btn btn-sm btn-danger"onclick="event.preventDefault();document.getElementById('delete-user-form-{{$occupant->id}}').submit()"data-bs-toggle="modal"data-bs-target="#delete">Delete</button>
-                                                            <form id="delete-user-form-{{$occupant->id}}" action="{{route('Dashboard.deleteOccupant',$occupant->id)}}" method="POST">@csrf</form>
+                                                            <a class="btn btn-sm btn-danger" href="{{route('Dashboard.deleteShow',$occupant->id)}}">Delete</a>
+                                                            
                                                         </td>
-                                                    <!-- Action modals -->
-                                                        
-                                                        <!-- Delete modal -->
+                                                  
                                                     
                                                 </tr>     
                                                 @endforeach

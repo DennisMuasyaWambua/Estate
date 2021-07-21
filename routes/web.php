@@ -37,8 +37,9 @@ Route::middleware(['auth','role:caretaker'])->prefix('Dashboard')->group(functio
     Route::get('allOccupants',[OccupantsController::class,'index'])->name('Dashboard.allOccupants');
     Route::post('/createOccupant',[OccupantsController::class,'store'])->name('Dashboard.createOccupant');
     Route::post('/deleteOccupant/{id}',[OccupantsController::class,'destroy'])->name('Dashboard.deleteOccupant');
-    Route::get('/updateOccupant/{id}',[OccupantsController::class,'edit'])->name('Dashboard.updateOccupant');
+    Route::post('/updateOccupant/{id}',[OccupantsController::class,'update'])->name('Dashboard.updateOccupant');
     Route::get('/showOccupant/{id}',[OccupantsController::class,'show'])->name('Dashboard.showOccupant');
+    Route::get('/deleteShow/{id}',[OccupantsController::class,'deleteShow'])->name('Dashboard.deleteShow');
     
   
     //Route::get('',[CaretakerController::class,'index']);
