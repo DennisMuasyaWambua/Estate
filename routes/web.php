@@ -33,7 +33,7 @@ Route::get('/auth',[DashboardController::class,'login']);
 //delta route to all other pages 
 Route::get('/Dashboard',[DashboardController::class,'index']);
 
-Route::middleware(['auth','role:caretaker'])->prefix('Dashboard')->group(function(){
+Route::middleware(['web','role:caretaker'])->prefix('Dashboard')->group(function(){
     Route::get('allOccupants',[OccupantsController::class,'index'])->name('Dashboard.allOccupants');
     Route::post('/createOccupant',[OccupantsController::class,'store'])->name('Dashboard.createOccupant');
     Route::post('/deleteOccupant/{id}',[OccupantsController::class,'destroy'])->name('Dashboard.deleteOccupant');
@@ -44,15 +44,7 @@ Route::middleware(['auth','role:caretaker'])->prefix('Dashboard')->group(functio
   
     //Route::get('',[CaretakerController::class,'index']);
 });
-// Route::middleware('auth')->group(function(){
-//     Route::get('/Dashboard',[DashboardController::class,'index']);
-//     Route::get('/Dashboard',[CaretakerController::class,'index']);
+// Route::middleware(['auth','role:occupant'])->prefix('Dashboard')->group)(function(){
+   
 // });
-/** care taker routes */
-Route::get('/caretaker',[DashboardController::class,'loginCareTaker']);
-Route::get('/caretakerRegister', [DashboardController::class,'registerCaretaker']);
-
-/**Normal user login */
-Route::get('/user',[DashboardController::class,'userLogin']);
-Route::get('/userRegister',[DashboardController::class,'userRegister']);
 

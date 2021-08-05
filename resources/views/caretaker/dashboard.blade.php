@@ -1,6 +1,10 @@
 @extends('caretaker.caretakerTemplate')
    
     @section('content')
+    <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{asset('sweetalert2/sweetalert2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('toastr/toastr.min.css')}}">   
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="40"
@@ -80,17 +84,17 @@
                     </a>
                 </div>
 
-                <div class="set-payment-date">
+                <div class="deadline">
                     <a
-                        class="bills"
+                        class="deadline-card"
                         href="#billsModal"
                         data-bs-toggle="modal"
                         data-bs-target="#billsModal"
                     >
-                        <div class="bills-overlay"></div>
-                        <div class="bills-circle">
-                        <img src="bank.png" alt="" />
-                        <p>Set service charge payment date</p>
+                        <div class="deadline-overlay"></div>
+                        <div class="deadline-circle">
+                        <img src="{{asset('images/bank.png')}}" alt="" />
+                        <p>Payment Date</p>
                         </div>
                     </a>
                 </div>
@@ -130,6 +134,7 @@
                                         <tbody class="table-dark">
                                                 
                                                 @foreach($occupants as $occupant)
+                                                
                                                 <tr>
                                                     <td>{{$occupant['id']}}</td>
                                                     <td>{{$occupant['name']}}</td>
@@ -217,34 +222,40 @@
                             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{route('Dashboard.createOccupant')}}"method="POST">
+                            <form id="createOccupant" auto-complete="off" action="{{route('Dashboard.createOccupant')}}"method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <input hidden="true" value="{{auth()->user()->id}}" name="caretakerId">
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    <input class="form-control" type="text" name="name" placeholder="Occupant's name" autofocus>
+                                    <input id="name" class="form-control" type="text" name="name" placeholder="Occupant's name" autofocus>
+                                    <span class="text-danger error-text name_error"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input class="form-control" type="email" name="email" placeholder="email" >
+                                    <input id="email" class="form-control" type="email" name="email" placeholder="email" >
+                                    <span class="text-danger error-text email_error"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Phone</label>
-                                    <input class="form-control" type="number" name="phone" placeholder="phone" value="+254" >
+                                    <input id="phone" class="form-control" type="number" name="phone" placeholder="phone" >
+                                    <span class="text-danger error-text phone_error"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="estate">Estate</label>
-                                    <input class="form-control" type="text" name="estate" placeholder="estate" >
+                                    <input id="estate" class="form-control" type="text" name="estate" placeholder="estate" >
+                                    <span class="text-danger error-text estate_error"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Block Number</label>
-                                    <input class="form-control" type="text" name="blockNumber" placeholder="block number" >
+                                    <input id="blockNumber" class="form-control" type="text" name="blockNumber" placeholder="block number" >
+                                    <span class="text-danger error-text blockNumber_error"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="flatNumber">Flat Number</label>
-                                    <input class="form-control" type="text" name="flatNumber" placeholder="flat number" >
+                                    <input id="flatNumber" class="form-control" type="text" name="flatNumber" placeholder="flat number" >
+                                    <span class="text-danger error-text flatNumber_error"></span>
                                 </div>
 
                                 <button class="btn btn-sm btn-success"style="float:right;padding:5px;margin-top:5px;" type="submit">Add occupant</button>
@@ -254,7 +265,52 @@
                     </div>
                 </div>
             </div>
-            
+            <script src="{{asset('datatable/js/jquery.dataTables.min.js')}}"></script>
+            <script src="{{asset('datatable/js/dataTables.bootstrap4.min.js')}}"></script>
+            <script src="{{asset('sweetalert2/sweetalert2.min.js')}}"></script>
+            <script src="{{ asset('toastr/toastr.min.js') }}"></script>
+            <script src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
+                
+            <script type="text/javascript">
+           //toastr.options.preventDuplicates = true;
+            toastr.options.preventDuplicates = true;
+             $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
 
+            $(function(){
+                // Add an occupant using Ajax
+                $('#createOccupant').on('submit',function(e){
+                    e.preventDefault();
+                    var form = this;
+                    var formData = {
+                        name:$('#name').val(),
+                        email:$('#email').val(),
+                        phone: $('#phone').val(),
+                        estate:$('#estate').val(),
+                        blockNumber:$('#blockNumber').val(),
+                        flatNumber:$('#flatNumber').val()
+                    };
+                    $.ajax(
+                            {
+                                url:  "Dashboard/createOccupant",
+                                method: 'post',
+                                data:formData,
+                                headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                                success: function (result) {
+                                    console.log("result:\n");
+                                    console.log(result);
+                                },
+                                error: function (result) {
+                                    console.log(result);   
+                                }
+                            }
+                        )
+                    }); 
+            });
+                   
+        </script>
                 
     @endsection

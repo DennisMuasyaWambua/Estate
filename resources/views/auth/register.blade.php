@@ -51,6 +51,7 @@
                     <select name="role_id" id="caretaker-role">
                         <option value="admin">admin</option>
                         <option value="user">user</option>
+                        <option value="occupant">occupant</option>
                         <option value="caretaker">caretaker</option>
                     </select>
                 </label>
