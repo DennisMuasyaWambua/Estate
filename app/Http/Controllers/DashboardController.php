@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\caretaker;
+use App\Models\occupants;
 use App\Models\User;
 use App\Models\Occupant;
 use Illuminate\Support\Facades\DB;

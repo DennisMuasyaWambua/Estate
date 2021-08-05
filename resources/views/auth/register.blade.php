@@ -3,7 +3,10 @@
         <form class="form-floating" method="POST" action="{{route('register')}}">
             @csrf
             <img src="{{asset('images/smart1.jpeg')}}" style="border-radius: 150px; width:100px;height:100px;" >
-            <div class="login-title"><p>SMART ESTATE</p></div>
+            <div class="login-title">
+                <p>SMART ESTATE</p>
+                <p>Create your account</p>
+            </div>
                     
             <div class="form-group">
                 <label class="form-control" for="name"  id="name" >Name</label>
@@ -18,7 +21,7 @@
 
             <div class="form-group">
                 <label class="form-control" for="email"  id="email" >Email</label>
-                <input name="email" type="email" class="form-control is-invalid" placeholder="email"> 
+                <input name="email" type="email" class="form-control is-invalid" placeholder="Email"> 
                 @error('email')
                     <span class="invalid-feedback is-invalid" role="alert">
                         <strong>{{ $message }}</strong>
@@ -27,8 +30,8 @@
             </div>
 
             <div class="form-group">
-                <label class="form-control" for="password"  id="password" >password</label>
-                <input name="password" type="password" class="form-control is-invalid" placeholder="password" >
+                <label class="form-control" for="password"  id="password" >Password</label>
+                <input name="password" type="password" class="form-control is-invalid" placeholder="Password" >
                 @error('password')
                     <span class="invalid-feedback is-invalid" role="alert">
                         <strong>{{ $message }}</strong>
@@ -38,8 +41,8 @@
             </div>
 
             <div class="form-group">
-                <label class="form-control" for="password"  id="password-confirm" >Confirm-password</label>
-                <input name="password_confirmation" type="password" class="form-control is-invalid" placeholder="confirm-password"  required autocomplete="new-password">
+                <label class="form-control" for="password"  id="password-confirm" >Confirm Password</label>
+                <input name="password_confirmation" type="password" class="form-control is-invalid" placeholder="Confirm Password"  required autocomplete="new-password">
                 @error('password-confirm')
                     <span class="invalid-feedback is-invalid" role="alert">
                         <strong>{{ $message }}</strong>
@@ -47,7 +50,7 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="role_id" class="form-control" id="role_id">Register as:
+                <label for="role_id" class="form-control" id="role_id">Register As:
                     <select name="role_id" id="caretaker-role">
                         <option value="admin">admin</option>
                         <option value="user">user</option>

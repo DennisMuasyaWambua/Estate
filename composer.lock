@@ -1076,6 +1076,7 @@
         },
         {
             "name": "laravel/framework",
+<<<<<<< HEAD
             "version": "v8.50.0",
             "source": {
                 "type": "git",
@@ -1086,6 +1087,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/d892dbacbe3859cf9303ccda98ac8d782141d5ae",
                 "reference": "d892dbacbe3859cf9303ccda98ac8d782141d5ae",
+=======
+            "version": "v8.51.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "208d9c0043b4c192a9bb9b15782cc4ec37f28bb0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/208d9c0043b4c192a9bb9b15782cc4ec37f28bb0",
+                "reference": "208d9c0043b4c192a9bb9b15782cc4ec37f28bb0",
+>>>>>>> 39003c79419a68371e0ff87f3bfb588428eacac8
                 "shasum": ""
             },
             "require": {
@@ -1240,7 +1253,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
+<<<<<<< HEAD
             "time": "2021-07-13T12:41:53+00:00"
+=======
+            "time": "2021-07-20T14:38:36+00:00"
+>>>>>>> 39003c79419a68371e0ff87f3bfb588428eacac8
         },
         {
             "name": "laravel/tinker",
@@ -1370,6 +1387,7 @@
         },
         {
             "name": "league/commonmark",
+<<<<<<< HEAD
             "version": "1.6.5",
             "source": {
                 "type": "git",
@@ -1380,6 +1398,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/44ffd8d3c4a9133e4bd0548622b09c55af39db5f",
                 "reference": "44ffd8d3c4a9133e4bd0548622b09c55af39db5f",
+=======
+            "version": "1.6.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/commonmark.git",
+                "reference": "c4228d11e30d7493c6836d20872f9582d8ba6dcf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/c4228d11e30d7493c6836d20872f9582d8ba6dcf",
+                "reference": "c4228d11e30d7493c6836d20872f9582d8ba6dcf",
+>>>>>>> 39003c79419a68371e0ff87f3bfb588428eacac8
                 "shasum": ""
             },
             "require": {
@@ -1467,7 +1497,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2021-06-26T11:57:13+00:00"
+=======
+            "time": "2021-07-17T17:13:23+00:00"
+>>>>>>> 39003c79419a68371e0ff87f3bfb588428eacac8
         },
         {
             "name": "league/flysystem",
@@ -5661,6 +5695,7 @@
         },
         {
             "name": "facade/ignition",
+<<<<<<< HEAD
             "version": "2.11.0",
             "source": {
                 "type": "git",
@@ -5671,6 +5706,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/facade/ignition/zipball/dc6818335f50ccf0b90284784718ea9a82604286",
                 "reference": "dc6818335f50ccf0b90284784718ea9a82604286",
+=======
+            "version": "2.11.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/facade/ignition.git",
+                "reference": "7c4e7a7da184cd00c7ce6eacc590200bb9672de7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/7c4e7a7da184cd00c7ce6eacc590200bb9672de7",
+                "reference": "7c4e7a7da184cd00c7ce6eacc590200bb9672de7",
+>>>>>>> 39003c79419a68371e0ff87f3bfb588428eacac8
                 "shasum": ""
             },
             "require": {
@@ -5733,7 +5780,11 @@
                 "issues": "https://github.com/facade/ignition/issues",
                 "source": "https://github.com/facade/ignition"
             },
+<<<<<<< HEAD
             "time": "2021-07-12T15:55:51+00:00"
+=======
+            "time": "2021-07-20T14:01:22+00:00"
+>>>>>>> 39003c79419a68371e0ff87f3bfb588428eacac8
         },
         {
             "name": "facade/ignition-contracts",
@@ -6034,6 +6085,7 @@
                 "source": "https://github.com/laravel/sail"
             },
             "time": "2021-07-15T07:35:41+00:00"
+<<<<<<< HEAD
         },
         {
             "name": "maximebf/debugbar",
@@ -6099,6 +6151,8 @@
                 "source": "https://github.com/maximebf/php-debugbar/tree/v1.16.5"
             },
             "time": "2020-12-07T11:07:24+00:00"
+=======
+>>>>>>> 39003c79419a68371e0ff87f3bfb588428eacac8
         },
         {
             "name": "mockery/mockery",
@@ -6320,16 +6374,16 @@
         },
         {
             "name": "phar-io/manifest",
-            "version": "2.0.1",
+            "version": "2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phar-io/manifest.git",
-                "reference": "85265efd3af7ba3ca4b2a2c34dbfc5788dd29133"
+                "reference": "97803eca37d319dfa7826cc2437fc020857acb53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phar-io/manifest/zipball/85265efd3af7ba3ca4b2a2c34dbfc5788dd29133",
-                "reference": "85265efd3af7ba3ca4b2a2c34dbfc5788dd29133",
+                "url": "https://api.github.com/repos/phar-io/manifest/zipball/97803eca37d319dfa7826cc2437fc020857acb53",
+                "reference": "97803eca37d319dfa7826cc2437fc020857acb53",
                 "shasum": ""
             },
             "require": {
@@ -6374,9 +6428,9 @@
             "description": "Component for reading phar.io manifest information from a PHP Archive (PHAR)",
             "support": {
                 "issues": "https://github.com/phar-io/manifest/issues",
-                "source": "https://github.com/phar-io/manifest/tree/master"
+                "source": "https://github.com/phar-io/manifest/tree/2.0.3"
             },
-            "time": "2020-06-27T14:33:11+00:00"
+            "time": "2021-07-20T11:28:43+00:00"
         },
         {
             "name": "phar-io/version",
@@ -6974,6 +7028,7 @@
         },
         {
             "name": "phpunit/phpunit",
+<<<<<<< HEAD
             "version": "9.5.6",
             "source": {
                 "type": "git",
@@ -6984,6 +7039,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fb9b8333f14e3dce976a60ef6a7e05c7c7ed8bfb",
                 "reference": "fb9b8333f14e3dce976a60ef6a7e05c7c7ed8bfb",
+=======
+            "version": "9.5.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit.git",
+                "reference": "d0dc8b6999c937616df4fb046792004b33fd31c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d0dc8b6999c937616df4fb046792004b33fd31c5",
+                "reference": "d0dc8b6999c937616df4fb046792004b33fd31c5",
+>>>>>>> 39003c79419a68371e0ff87f3bfb588428eacac8
                 "shasum": ""
             },
             "require": {
@@ -7061,7 +7128,11 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.6"
+=======
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.7"
+>>>>>>> 39003c79419a68371e0ff87f3bfb588428eacac8
             },
             "funding": [
                 {
@@ -7073,7 +7144,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
             "time": "2021-06-23T05:14:38+00:00"
+=======
+            "time": "2021-07-19T06:14:47+00:00"
+>>>>>>> 39003c79419a68371e0ff87f3bfb588428eacac8
         },
         {
             "name": "sebastian/cli-parser",
@@ -8168,5 +8243,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

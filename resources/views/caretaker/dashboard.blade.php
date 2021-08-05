@@ -115,8 +115,7 @@
                 </div>
                 <div class="modal-body">
                         <div id="table">
-                            <form action="{{route('Dashboard.allOccupants')}}" method='POST'>
-                                @csrf
+                                <form action="{{route('Dashboard.allOccupants')}}" method="POST">
                                     <table class="table">
                                         <thead class="table-dark">
                                             <a class="btn btn-sm btn-success"role="button"style="float:right;margin-bottom:5px;padding:5px;"data-bs-toggle="modal"data-bs-target="#addOccupant">create occupant</a>
@@ -196,17 +195,20 @@
                                                                         <button class="btn btn-sm btn-primary"style="float:right;padding:5px;margin-top:5px;" type="submit">Edit occupant</button>
                                                                     </form>
                                                                 </div>
-                                                                
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-sm btn-danger"onclick="event.preventDefault();document.getElementById('delete-occupant-form-{{$occupant->id}}').submit()">Delete</button>
+                                                                    <form id="delete-occupant-form-{{$occupant->id}}" action="{{route('Dashboard.deleteOccupant',$occupant->id)}}"method="POST" style="display:none;">@csrf</form>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-            
-                                      
-                                            
-
+                                                </tr>
+                                            @endforeach
+                                                                                 
                                         </tbody>
-                                </table>
-                            </form>
+                                    </table>
+                                </form>
                             </div>
                         </div>
                         
