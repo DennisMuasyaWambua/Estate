@@ -78,7 +78,7 @@ class OccupantsController extends Controller
             $occupant->flatNumber = request('flatNumber');
             $occupant->save();
             // return redirect('/Dashboard');
-            return redirect(route('Dashboard.allOccupants'));
+            return redirect(route('Dashboard'));
             // $occupant->caretakerId = $request->caretakerId;
             // $occupant->name = $request->name;
             // $occupant->email = $request->email;
