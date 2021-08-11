@@ -19,7 +19,7 @@ class DashboardController extends Controller
         }elseif(Auth::user()->hasRole('landlord')){
             return view('landlord.dashboard');
         }elseif(Auth::user()->hasRole('caretaker')){
-            $occupants = Occupant::all();
+            $occupants = Occupant::paginate(5);
             return view('caretaker.dashboard',compact('occupants'));
         }elseif(Auth::user()->hasRole('tenant')){
             return view('tenant.dashboard');

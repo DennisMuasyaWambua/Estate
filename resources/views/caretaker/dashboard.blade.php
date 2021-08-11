@@ -144,8 +144,11 @@
                                                     <td>{{$occupant['flatNumber']}}</td>
                                                     <td>
                                                         <a class="btn btn-sm btn-primary" type="button" href="{{route('Dashboard.updateOccupant',$occupant->id)}}"data-bs-toggle="modal"data-bs-target="#occupancyModal">Update</a>
-                                                        <button class="btn btn-sm btn-danger" onclick="event.preventDefault();document.getElementById('delete-{{$occupant->id}}').submit()"data-bs-toggle="modal"data-bs-target="#delete">Delete</button>
+                                                        <button class="btn btn-sm btn-danger" onclick="event.preventDefault();document.getElementById('delete-{{$occupant->id}}').submit()">Delete</button>
+                                                        <form id="delete-occupant-form-{{$occupant->id}}" action="{{route('Dashboard.deleteOccupant',$occupant->id)}}"method="POST" style="display:none;">@csrf</form>
                                                     </td>
+                                                    <!-- pagination links -->
+                                                        
                                                     <!-- delete modal -->
                                                     <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -157,14 +160,12 @@
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <form id="delete-{{$occupant->id}}" action="{{route('Dashboard.editOccupant',$occupant->id)}}" method="GET">@csrf
-                                                                        <p>Are you sure you want to delete{{$occupant->name}}</p>
-                                                                    </form>
+                                                                    
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                                     <button type="button" class="btn btn-sm btn-danger"onclick="event.preventDefault();document.getElementById('delete-occupant-form-{{$occupant->id}}').submit()">Delete</button>
-                                                                    <form id="delete-occupant-form-{{$occupant->id}}" action="{{route('Dashboard.deleteOccupant',$occupant->id)}}"method="POST" style="display:none;">@csrf</form>
+                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -173,7 +174,10 @@
                                             @endforeach
                                                                                  
                                         </tbody>
+                                        
                                     </table>
+                                    
+                                    {{$occupants->links()}}
                                 </form>
                             </div>
                         </div>
@@ -267,16 +271,32 @@
                                 method: 'post',
                                 data:formData,
                                 headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                                success: function (result) {
-                                    console.log("result:\n");
-                                    console.log(result);
+                                success: function (data) {
+                                    console.log("data:\n");
+                                    console.log(data);
+                                    toastr.success(data.msg);
                                 },
                                 error: function (result) {
                                     console.log(result);   
                                 }
                             }
                         )
-                    }); 
+                    });
+                $('#deleteOccupant').on('submit',function(e){
+                    
+                    $.ajax({
+                        url:'Dashboard/deleteOccupant',
+                        method:'post',
+                        headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        success: function(result){
+                            console.log(result);
+                        },
+                        error:function(result){
+                            console.log(result);
+                        }
+                        
+                    })
+                });
             });
                    
         </script>

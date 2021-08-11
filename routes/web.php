@@ -45,6 +45,7 @@ Route::middleware(['web','role:caretaker'])->prefix('Dashboard')->group(function
 // });
 
 
+
 /**Normal user login */
 Route::get('/user',[DashboardController::class,'userLogin']);
 Route::get('/userRegister',[DashboardController::class,'userRegister']);
