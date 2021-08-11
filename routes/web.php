@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CaretakerController;
+use App\Http\Controllers\LandlordController;
 use App\Http\Controllers\OccupantsController;
 
 /*
@@ -40,9 +41,18 @@ Route::middleware(['web','role:caretaker'])->prefix('Dashboard')->group(function
     Route::post('/updateOccupant/{id}',[OccupantsController::class,'edit'])->name('Dashboard.updateOccupant');
     Route::get('/editOccupant/{id}',[OccupantsController::class,'show'])->name('Dashboard.editOccupant');
 });
+
+Route::middleware(['web','role:landlord'])->prefix('Dashboard')->group(function(){
+    Route::get('allOccupants',[OccupantsController::class,'index'])->name('Dashboard.allOccupants');
+    Route::post('/createOccupant',[OccupantsController::class,'store'])->name('Dashboard.createOccupant');
+    Route::post('/deleteOccupant/{id}',[OccupantsController::class,'destroy'])->name('Dashboard.deleteOccupant');
+    Route::post('/updateOccupant/{id}',[OccupantsController::class,'edit'])->name('Dashboard.updateOccupant');
+    Route::get('/editOccupant/{id}',[OccupantsController::class,'show'])->name('Dashboard.editOccupant');
+});
 // Route::middleware(['auth','role:occupant'])->prefix('Dashboard')->group)(function(){
    
 // });
+
 
 
 /**Normal user login */

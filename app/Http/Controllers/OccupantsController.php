@@ -78,7 +78,7 @@ class OccupantsController extends Controller
             $occupant->flatNumber = request('flatNumber');
             $occupant->save();
             // return redirect('/Dashboard');
-            return redirect(route('Dashboard'));
+            return redirect(route('Dashboard.allOccupants'));
             // $occupant->caretakerId = $request->caretakerId;
             // $occupant->name = $request->name;
             // $occupant->email = $request->email;
@@ -108,7 +108,7 @@ class OccupantsController extends Controller
     public function show($id)
     {   
         $person = Occupant::find($id);
-       return view('partials.update',compact('person'));
+       return view('caretaker.dashboard',compact('person'));
     }
 
     public function deleteShow($id){
