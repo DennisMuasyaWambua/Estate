@@ -47,7 +47,7 @@ class DashboardController extends Controller
     public function registerLandlord(){
         return view('auth.landlordRegister');
     }
-    public function loginLandlord(){
+    public function loginLandLord(){
         return view('auth.landlordLogin');
     }
 

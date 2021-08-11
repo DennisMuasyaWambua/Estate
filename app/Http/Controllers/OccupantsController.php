@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\occupants;
+use App\Models\Occupant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-
+use DataTables;
+use Validator;
 
 class OccupantsController extends Controller
 {
@@ -17,9 +16,8 @@ class OccupantsController extends Controller
      */
     public function index()
     {
-      $occupants = occupants::all();
-      //dd($occupants);
-     return view('caretaker.dashboard',['occupants'=>$occupants]);
+       $occupants = Occupant::all();
+      return view('caretaker.dashboard',compact('occupants'));
     }
 
     /**
@@ -29,17 +27,17 @@ class OccupantsController extends Controller
      */
     public function create()
     {
-        // $id = Auth::id();
-        // //create a new occupant
-        // $occpant = new Occupants();
-        // $occupant->caretakerId = $id;
-        // $occpant->name = request('name');
-        // $occupant->email = request('email');
-        // $occupant->phone = request('phone');
-        // $occupant->estate = request('estate');
-        // $occupant->blockNumber = request('blockNumber');
-        // $occupant->flatNumber = request('flatNumber');
-        // $occupant->save();
+        $id = Auth::id();
+        //create a new occupant
+        $occpant = new Occupant();
+        $occupant->caretakerId = request('caretakerId');
+        $occpant->name = request('name');
+        $occupant->email = request('email');
+        $occupant->phone = request('phone');
+        $occupant->estate = request('estate');
+        $occupant->blockNumber = request('blockNumber');
+        $occupant->flatNumber = request('flatNumber');
+        $occupant->save();
         // return redirect('/Dashboard');
         return view('Dashboard');
     }
@@ -52,20 +50,52 @@ class OccupantsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // $id = Auth::id();
-        // $occpant = new Occupants();
-        // $occupant->caretakerId = $id;
-        // $occpant->name = $request->name;
-        // $occupant->email = $request->email;
-        // $occupant->phone = $request->phone;
-        // $occupant->estate = $request->estate;
-        // $occupant->blockNumber = $request->blockNumber;
-        // $occupant->flatNumber = $request->flatNUmber;
-        // $occpant->save();
-        // return redirect('/Dashboard');
-        $occupant = occupants::create($request->except('_token'));
-        return redirect(route('Dashboard.allOccupants'));
+        
+       $validator = Validator::make($request->all(),[
+            'name'=>'required',
+            'email'=>'required',
+            'phone'=>'required',
+            'estate'=>'required',
+            'blockNumber'=>'required',
+            'flatNumber'=>'required',
+        ]);
+        if(!$validator->passes()){
+            //dd('niko hapa');
+            return response()->json(['code'=>0,'error'=>$validator->errors()->toArray()]);
+        }else{
+            
+            $id = Auth::id();
+           //dd($id);
+            //create a new occupant
+            
+            $occupant = new Occupant();
+            $occupant->caretakerId = $id;
+            $occupant->name = request('name');
+            $occupant->email = request('email');
+            $occupant->phone = request('phone');
+            $occupant->estate = request('estate');
+            $occupant->blockNumber = request('blockNumber');
+            $occupant->flatNumber = request('flatNumber');
+            $occupant->save();
+            // return redirect('/Dashboard');
+            return redirect(route('Dashboard'));
+            // $occupant->caretakerId = $request->caretakerId;
+            // $occupant->name = $request->name;
+            // $occupant->email = $request->email;
+            // $occupant->phone = $request->phone;
+            // $occupant->estate = $request->estate;
+            // $occupant->blockNumber = $request->blockNumber;
+            // $occupant->flatNumber = $request->flatNumber;
+            // $query = $occupant->create($request->except('_token'));
+            // if(!$query){
+            //     return response()->json(['code'=>0,'msg'=>'Something went wrong']);
+            // }else{
+            //     return response()->json(['code'=>1,'msg'=>'New Country has been successfully saved']);
+            // }
+
+        }
+        // $occupant = occupants::create($request->except('_token'));
+        // return redirect(route('Dashboard.allOccupants'));
         //dd($request);
     }
 
@@ -76,10 +106,14 @@ class OccupantsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-       $occupants = occupants::find($id);
-       return view('caretaker.dashboard')->with('occupants',$occupants);
+    {   
+        $person = Occupant::find($id);
+       return view('partials.update',compact('person'));
+    }
+
+    public function deleteShow($id){
+        $delete = Occupant::find($id);
+        return view('partials.delete',compact('delete'));
     }
 
     /**
@@ -91,20 +125,30 @@ class OccupantsController extends Controller
     public function edit($id)
     {
         //
-        $occupants = occupants::find($id);
-        return view('caretaker.dashboard')->with('occupants',$occupants);
+        $occupants = Occupant::all();
+        $occupant = $occupants->find($id);
+        //dd($occupant);
+        return view('caretaker.dashboard',compact('occupant'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $person = Occupant::find($request->id);
+        $person->name = $request->name;
+        $person->email = $request->email;
+        $person->phone = $request->phone;
+        $person->estate = $request->estate;
+        $person->blockNumber = $request->blockNumber;
+        $person->flatNumber = $request->flatNumber;
+        $person->save();
+        return redirect(route('Dashboard.allOccupants'));
 
     }
 
@@ -117,13 +161,13 @@ class OccupantsController extends Controller
     public function destroy($id)
     {
         //deleting an occupant 
-        occupants::destroy($id);
+        Occupant::destroy($id);
         return redirect(route('Dashboard.allOccupants'));
         // dd($id);
     }
 
     public function occupants(){
-        $occupants = occupants::all();
-        return view('Dashboard.allOccupants',compact('occupants',$occupants));
+        $occupants = Occupant::all();
+        return view('caretaker.dashboard')->with('occupants',$occupants);
     }
 }
