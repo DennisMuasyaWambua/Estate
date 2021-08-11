@@ -2,14 +2,14 @@
     @section('content')
         <form class="form-floating" method="POST" action="{{route('register')}}">
             @csrf
-            <img src="{{asset('images/smart1.jpeg')}}" style="border-radius: 150px; width:100px;height:100px;" >
+            <img src="{{asset('images/smart1.jpeg')}}" style="border-radius: 150px; width:100px;height:88px; text-align:center" >
             <div class="login-title">
                 <p>SMART ESTATE</p>
                 <p>Create your account</p>
             </div>
                     
             <div class="form-group">
-                <label class="form-control" for="name"  id="name" >Name</label>
+                <label class="form-control" for="name"  id="name" >Name <br></label>
                 <input name="name" type="text" class="form-control is-invalid" placeholder="Name"  autofocus> 
                 @error('name')
                     <span class="invalid-feedback is-invalid" role="alert">
@@ -20,7 +20,7 @@
             </div>
 
             <div class="form-group">
-                <label class="form-control" for="email"  id="email" >Email</label>
+                <label class="form-control" for="email"  id="email" >Email <br></label>
                 <input name="email" type="email" class="form-control is-invalid" placeholder="Email"> 
                 @error('email')
                     <span class="invalid-feedback is-invalid" role="alert">
@@ -30,7 +30,7 @@
             </div>
 
             <div class="form-group">
-                <label class="form-control" for="password"  id="password" >Password</label>
+                <label class="form-control" for="password"  id="password" >Password <br></label>
                 <input name="password" type="password" class="form-control is-invalid" placeholder="Password" >
                 @error('password')
                     <span class="invalid-feedback is-invalid" role="alert">
@@ -41,7 +41,7 @@
             </div>
 
             <div class="form-group">
-                <label class="form-control" for="password"  id="password-confirm" >Confirm Password</label>
+                <label class="form-control" for="password"  id="password-confirm" >Confirm Password <br></label>
                 <input name="password_confirmation" type="password" class="form-control is-invalid" placeholder="Confirm Password"  required autocomplete="new-password">
                 @error('password-confirm')
                     <span class="invalid-feedback is-invalid" role="alert">
@@ -52,9 +52,10 @@
             <div class="form-group">
                 <label for="role_id" class="form-control" id="role_id">Register As:
                     <select name="role_id" id="caretaker-role">
-                        <option value="admin">admin</option>
-                        <option value="user">user</option>
-                        <option value="caretaker">caretaker</option>
+                        <option value = "admin">admin</option>
+                        <option value = "user">user</option>
+                        <option value = "caretaker">caretaker</option>
+                        <option value = "landlord">landlord</option>
                     </select>
                 </label>
             </div>

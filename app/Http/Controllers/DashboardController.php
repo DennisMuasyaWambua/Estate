@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\caretaker;
+use App\Models\landlord;
 use App\Models\occupants;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +17,8 @@ class DashboardController extends Controller
         if(Auth::user()->hasRole('admin')){
             return view('admin.dashboard');
         }elseif(Auth::user()->hasRole('landlord')){
-            return view('landlord.dashboard');
+            $occupants = occupants::all();
+            return view('landlord.dashboard',compact('occupants'));
         }elseif(Auth::user()->hasRole('caretaker')){
             $occupants = occupants::all();
             return view('caretaker.dashboard',compact('occupants'));
@@ -41,6 +43,14 @@ class DashboardController extends Controller
         return view('auth.caretakerLogin');
     }
 
+    //authenticate landlord
+    public function registerLandlord(){
+        return view('auth.landlordRegister');
+    }
+    public function loginLandlord(){
+        return view('auth.landlordLogin');
+    }
+
     //common auth login
     public function login(){
         return view('auth.login');
@@ -62,6 +72,11 @@ class DashboardController extends Controller
     public function caretakerDashboard(){
         return view('caretaker.dashboard');
     }
+
+    public function landlordDashboard(){
+        return view('landlord.dashboard');
+    }
+
     public function userDashboard(){
         return view('user.userDashboard');
     }

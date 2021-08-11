@@ -8,7 +8,7 @@
                 <div class="login-title"><p>SMART ESTATE</p></div>
                     
                     <div class="form-group">
-                                <label for="email" class="sr-only">Email</label>
+                                <label for="email" class="sr-only">Email <br></label>
                                 <input type="email" name="email" id="email" class="form-control @error('name') is-invalid @enderror" placeholder="Email address">
                                 @error('email')
                                     <span class="invalid-feedback is-invalid" role="alert">
@@ -17,7 +17,7 @@
                                 @enderror
                             </div>
                             <div class="form-group mb-4">
-                                <label for="password" class="sr-only">Password</label>
+                                <label for="password" class="sr-only">Password <br></label>
                                 <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" placeholder="***********">
                                 @error('password')
                                     <span class="invalid-feedback is-invalid" role="alert">
