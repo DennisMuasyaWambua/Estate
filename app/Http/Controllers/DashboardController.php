@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\caretaker;
 use App\Models\landlord;
-use App\Models\occupants;
+use App\Models\occupant;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -17,8 +17,7 @@ class DashboardController extends Controller
         if(Auth::user()->hasRole('admin')){
             return view('admin.dashboard');
         }elseif(Auth::user()->hasRole('landlord')){
-            $occupants = occupants::paginate(5);
-            return view('landlord.dashboard',compact('occupants'));
+            return view('landlord.dashboard');
         }elseif(Auth::user()->hasRole('caretaker')){
             $occupants = occupant::paginate(5);
             return view('caretaker.dashboard',compact('occupants'));

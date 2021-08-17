@@ -1,4 +1,4 @@
-@extends('caretaker.caretakerTemplate')
+@extends('landlord.landlordTemplate')
 
     @section('content')
     <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
@@ -133,25 +133,7 @@
                                         </thead>
                                         <tbody class="table-dark">
                                                 
-                                                @foreach($occupants as $occupant)
-                                                <tr>
-                                                    <td>{{$occupant['id']}}</td>
-                                                    <td>{{$occupant['name']}}</td>
-                                                    <td>{{$occupant['email']}}</td>
-                                                    <td>{{$occupant['phone']}}</td>
-                                                    <td>{{$occupant['estate']}}</td>
-                                                    <td>{{$occupant['blockNumber']}}</td>
-                                                    <td>{{$occupant['flatNumber']}}</td> 
-                                                    <!-- actions on the occupant -->
-                                                        <td>
-                                                            <a class="btn btn-sm btn-primary" href="{{route('Dashboard.showOccupant',$occupant->id)}}" >Update</a>
-                                                            <a class="btn btn-sm btn-danger" href="{{route('Dashboard.deleteShow',$occupant->id)}}">Delete</a>
-                                                            
-                                                        </td>
-                                                  
-                                                    
-                                                </tr>     
-                                                @endforeach
+                                         
                                        
                                             <!-- Edit user  -->
                                                     <div class="modal fade" id="editOccupant" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
