@@ -115,7 +115,7 @@
                 </div>
                 <div class="modal-body">
                         <div id="table">
-                                <form action="{{route('Dashboard.allOccupants')}}" method="POST">
+                                
                                     <table class="table">
                                         <thead class="table-dark">
                                             <a class="btn btn-sm btn-success"role="button"style="float:right;margin-bottom:5px;padding:5px;"data-bs-toggle="modal"data-bs-target="#addOccupant">create occupant</a>
@@ -132,22 +132,86 @@
                                         </thead>
                                         <tbody class="table-dark">
                                                 
-                                                @foreach($occupants as $occupant)
+                                                @foreach($occupant as $Occupant)
                                                 
                                                 <tr>
-                                                    <td>{{$occupant['id']}}</td>
-                                                    <td>{{$occupant['name']}}</td>
-                                                    <td>{{$occupant['email']}}</td>
-                                                    <td>{{$occupant['phone']}}</td>
-                                                    <td>{{$occupant['estate']}}</td>
-                                                    <td>{{$occupant['blockNumber']}}</td>
-                                                    <td>{{$occupant['flatNumber']}}</td>
+                                                    <td>{{$Occupant['id']}}</td>
+                                                    <td>{{$Occupant['name']}}</td>
+                                                    <td>{{$Occupant['email']}}</td>
+                                                    <td>{{$Occupant['phone']}}</td>
+                                                    <td>{{$Occupant['estate']}}</td>
+                                                    <td>{{$Occupant['blockNumber']}}</td>
+                                                    <td>{{$Occupant['flatNumber']}}</td>
                                                     <td>
-                                                        <a class="btn btn-sm btn-primary" type="button" href="{{route('Dashboard.updateOccupant',$occupant->id)}}"data-bs-toggle="modal"data-bs-target="#occupancyModal">Update</a>
-                                                        <button class="btn btn-sm btn-danger" onclick="event.preventDefault();document.getElementById('delete-{{$occupant->id}}').submit()">Delete</button>
-                                                        <form id="delete-occupant-form-{{$occupant->id}}" action="{{route('Dashboard.deleteOccupant',$occupant->id)}}"method="POST" style="display:none;">@csrf</form>
+                                                        <a id="updateButton"href="{{route('Dashboard.editOccupant',$Occupant->id)}}"value="{{$Occupant->id}}"class="btn btn-sm btn-primary" data-id="'.$Occupant['id'].'"type="button" >Update</a>
+                                                        <!-- <a id="deleteButton"href="{{route('Dashboard.editOccupant',$Occupant->id)}}" class="btn btn-sm btn-danger" type="button"value="{{$Occupant->id}}" >Delete</a> -->
+                                                        <button class="btn btn-sm btn-danger" onclick="event.preventDefault();document.getElementById('delete-occupant-form-{{$Occupant->id}}').submit()">Delete</button>
+                                                        <form id="delete-occupant-form-{{$Occupant->id}}" action="{{route('Dashboard.deleteOccupant',$Occupant->id)}}"method="POST" style="display:none;">@csrf</form>
                                                     </td>
-                                                    <!-- pagination links -->
+                                                    <!-- update modal -->
+                                                    <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLongTitle">update</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                       <!-- this is the update form modal -->
+                                                                       <div class="update-person">
+                                                                    <form id="update-occupant-form-{{$Occupant->id}}" action="{{route('Dashboard.updateOccupant',$Occupant->id)}}" method="POST">
+                                                                        @csrf
+                                                                        <div class="update-person">
+                                                                            <div class="form-group">
+                                                                                    <input id="occupant-{{$Occupant->id}}" hidden="true" value="{{$Occupant->id}}" name="Occupantid"/>
+                                                                                    <input hidden="true" value="{{auth()->user()->id}}" name="caretakerId">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="name">Name</label>
+                                                                                <input id="occupant-name-{{$Occupant->id}}"   class="form-control" value="{{$Occupant->name}}" type="text" name="name" placeholder="Occupant's name" autofocus>
+                                                                                <span class="text-danger error-text name_error"></span>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="email">Email</label>
+                                                                                <input id="occupant-email-{{$Occupant->id}}"  class="form-control"value="{{$Occupant->email}}" type="email" name="email" placeholder="email" >
+                                                                                <span class="text-danger error-text email_error"></span>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="phone">Phone</label>
+                                                                                <input id="occupant-phone-{{$Occupant->id}}" class="form-control" value="{{$Occupant->phone}}" type="number" name="phone" placeholder="phone" >
+                                                                                <span class="text-danger error-text phone_error"></span>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="estate">Estate</label>
+                                                                                <input id="occupant-estate-{{$Occupant->id}}"  class="form-control" value="{{$Occupant->estate}}" type="text" name="estate" placeholder="estate" >
+                                                                                <span class="text-danger error-text estate_error"></span>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="blockNumber">Block Number</label>
+                                                                                <input id="occupant-blockNumber-{{$Occupant->id}}"  class="form-control" value="{{$Occupant->blockNumber}}"type="text" name="blockNumber" placeholder="block number" >
+                                                                                <span class="text-danger error-text blockNumber_error"></span>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="flatNumber">Flat Number</label>
+                                                                                <input id="occupant-flatNumber-{{$Occupant->id}}"  class="form-control" value="{{$Occupant->flatNumber}}" type="text" name="flatNumber" placeholder="flat number" >
+                                                                                <span class="text-danger error-text flatNumber_error"></span>
+                                                                            </div>
+                                                                            <button  style="float:right; " class="btn btn-sm btn-primary" type="submit">Update</button>
+                                                                    </form>
+                                                                </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+                                                            
+                                                                    <!-- <button type="button" class="btn btn-sm btn-danger"onclick="event.preventDefault();document.getElementById('delete-occupant-form-{{$Occupant->id}}').submit()">Delete</button>
+                                                                    <form id="delete-occupant-form-{{$Occupant->id}}" action="{{route('Dashboard.deleteOccupant',$Occupant->id)}}"method="POST" style="display:none;">@csrf</form> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                   
                                                         
                                                     <!-- delete modal -->
                                                     <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -160,25 +224,32 @@
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    
+                                                                    <P>Are you sure that you want to delete <span class="person"></span> </P>    
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <button type="button" class="btn btn-sm btn-danger"onclick="event.preventDefault();document.getElementById('delete-occupant-form-{{$occupant->id}}').submit()">Delete</button>
-                                                                    
+                                                                    <a class="btn btn-sm btn-danger" type="button" href="{{route('Dashboard.deleteOccupant',$Occupant->id)}}">Delete</a>
+                                                                    <!-- <button type="button" class="btn btn-sm btn-danger"onclick="event.preventDefault();document.getElementById('delete-occupant-form-{{$Occupant->id}}').submit()">Delete</button>
+                                                                    <form id="delete-occupant-form-{{$Occupant->id}}" action="{{route('Dashboard.deleteOccupant',$Occupant->id)}}"method="POST" style="display:none;">@csrf</form> -->
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    
                                                 </tr>
                                             @endforeach
+                                            <!-- modals -->
+                                                    <!-- update modal -->
+                                                   
+                                                    <!-- Delete Moodal -->
+                                                   
                                                                                  
                                         </tbody>
                                         
                                     </table>
                                     
-                                    {{$occupants->links()}}
-                                </form>
+                                    {{$occupant->links()}}
+                               
                             </div>
                         </div>
                         
@@ -197,6 +268,7 @@
                             <form id="createOccupant" auto-complete="off" action="{{route('Dashboard.createOccupant')}}"method="POST">
                                 @csrf
                                 <div class="form-group">
+                                   
                                     <input hidden="true" value="{{auth()->user()->id}}" name="caretakerId">
                                 </div>
                                 <div class="form-group">
@@ -237,6 +309,70 @@
                     </div>
                 </div>
             </div>
+            <!-- register new occupant as a user with a role -->
+            <form id="official-occupant" class="official-occupant" style="display:none;" class="form-floating" method="POST" action="{{route('register')}}">
+                @csrf
+                <img src="{{asset('images/smart1.jpeg')}}" style="border-radius: 150px; width:100px;height:100px;" >
+                <div class="login-title">
+                    <p>SMART ESTATE</p>
+                    <p>Create your account</p>
+                </div>
+                        
+                <div class="form-group">
+                    <label class="form-control" for="name"  id="name" >Name</label>
+                    <input id="new-occupant-name" name="name" type="text" class="form-control is-invalid" placeholder="Name"  autofocus> 
+                    @error('name')
+                        <span class="invalid-feedback is-invalid" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control" for="email"  id="email" >Email</label>
+                    <input id="new-occupant-email" name="email" type="email" class="form-control is-invalid" placeholder="Email"> 
+                    @error('email')
+                        <span class="invalid-feedback is-invalid" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control" for="password"  id="password" >Password</label>
+                    <input id="new-occupant-password" name="password" type="password" class="form-control is-invalid" placeholder="Password" >
+                    @error('password')
+                        <span class="invalid-feedback is-invalid" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+    
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control" for="password"  id="password-confirm" >Confirm Password</label>
+                    <input id="new-occupant-confirm-password" name="password_confirmation" type="password" class="form-control is-invalid" placeholder="Confirm Password"  required autocomplete="new-password">
+                    @error('password-confirm')
+                        <span class="invalid-feedback is-invalid" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="role_id" class="form-control" id="role_id">Register As:
+                        <select name="role_id" id="caretaker-role">
+                            <option value="occupant">occupant</option>
+                        </select>
+                    </label>
+                </div>
+                <input name="register" id="register" class="btn btn-block login-btn mb-4" type="submit" value="Register">
+                <div class="redirection">
+                    <a href="#!" class="forgot-password-link">Forgot password?</a>
+                    <small><p class="login-card-footer-text">Alredy have an account? <a href="{{ route('login') }}" class="text-reset"id="register-login">Login here</a></p></small>
+                </div>
+            
+        </form>
             <script src="{{asset('datatable/js/jquery.dataTables.min.js')}}"></script>
             <script src="{{asset('datatable/js/dataTables.bootstrap4.min.js')}}"></script>
             <script src="{{asset('sweetalert2/sweetalert2.min.js')}}"></script>
@@ -265,6 +401,34 @@
                         blockNumber:$('#blockNumber').val(),
                         flatNumber:$('#flatNumber').val()
                     };
+                    
+                    var newOccupant = {
+                        name:$('#name').val(),
+                        email:$('#email').val(),
+                        password:'password',
+                        password_comfirmation:'password',
+                        role_id:'occupant'
+
+                    };
+                   
+                  
+                    //populating the form with data
+                   
+                   
+                    $.ajax({
+                        url:"/register",
+                        method:"post",
+                        data: newOccupant,
+                        headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        success: function (data) {
+                                console.log("data:\n");
+                                console.log(data);
+                        },
+                        error:function(result){
+                            console.log(result);
+                        }
+                    });
+                   
                     $.ajax(
                             {
                                 url:  "Dashboard/createOccupant",
@@ -273,8 +437,9 @@
                                 headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                                 success: function (data) {
                                     console.log("data:\n");
-                                    console.log(data);
-                                    toastr.success(data.msg);
+                                    console.log(data);                                       
+                                    toastr.success("user created successfully");
+                                    $('#addOccupant').modal('hide');
                                 },
                                 error: function (result) {
                                     console.log(result);   
@@ -282,22 +447,12 @@
                             }
                         )
                     });
-                $('#deleteOccupant').on('submit',function(e){
                     
-                    $.ajax({
-                        url:'Dashboard/deleteOccupant',
-                        method:'post',
-                        headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                        success: function(result){
-                            console.log(result);
-                        },
-                        error:function(result){
-                            console.log(result);
-                        }
-                        
-                    })
-                });
+                   
+               
             });
+            
+      
                    
         </script>
                 

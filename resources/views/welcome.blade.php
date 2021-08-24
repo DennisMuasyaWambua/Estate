@@ -16,7 +16,10 @@
     <script  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <!-- jquery -->
     <script  src="https://code.jquery.com/jquery-3.5.1.js"  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="crossorigin="anonymous" ></script>
-</head>
+    <!-- app icon -->
+    <!-- <link rel="icon" type="{{asset('images/favicon.ico')}}"> -->
+    <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}" type="image/x-icon">
+</head> 
 <body style="background-image:url('/images/home.jpg')">
 <div class="container">
       <nav class="nav">

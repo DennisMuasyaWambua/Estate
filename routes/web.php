@@ -30,15 +30,16 @@ Route::get('/', function () {
 
 //route to authentication for all user 
 Route::get('/auth',[DashboardController::class,'login']);
+Route::get('/auth/forgot-password',function(){return view('auth.forgot-password');});
 //delta route to all other pages 
-Route::get('/Dashboard',[DashboardController::class,'index']);
+Route::get('/Dashboard',[DashboardController::class,'index'])->name('Dashboard');
 
 Route::middleware(['web','role:caretaker'])->prefix('Dashboard')->group(function(){
-    Route::get('allOccupants',[OccupantsController::class,'index'])->name('Dashboard.allOccupants');
+    Route::get('/allOccupants',[OccupantsController::class,'index'])->name('Dashboard.allOccupants');
     Route::post('/createOccupant',[OccupantsController::class,'store'])->name('Dashboard.createOccupant');
     Route::post('/deleteOccupant/{id}',[OccupantsController::class,'destroy'])->name('Dashboard.deleteOccupant');
-    Route::post('/updateOccupant/{id}',[OccupantsController::class,'edit'])->name('Dashboard.updateOccupant');
-    Route::get('/editOccupant/{id}',[OccupantsController::class,'show'])->name('Dashboard.editOccupant');
+    Route::post('/updateOccupant/{id}',[OccupantsController::class,'update'])->name('Dashboard.updateOccupant');
+    Route::get('/editOccupant/{id}',[OccupantsController::class,'edit'])->name('Dashboard.editOccupant');
 });
 // Route::middleware(['auth','role:occupant'])->prefix('Dashboard')->group)(function(){
    

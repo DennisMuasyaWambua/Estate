@@ -52,7 +52,6 @@
             <div class="form-group">
                 <label for="role_id" class="form-control" id="role_id">Register As:
                     <select name="role_id" id="caretaker-role">
-                        <option value="admin">admin</option>
                         <option value="user">user</option>
                         <option value="occupant">occupant</option>
                         <option value="caretaker">caretaker</option>

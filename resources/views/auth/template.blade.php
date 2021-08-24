@@ -16,6 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
     <!-- jquery -->
     <script  src="https://code.jquery.com/jquery-3.5.1.js"  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="crossorigin="anonymous" ></script>
+    <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}" type="image/x-icon">
 </head>
 <body style="background-image:url('/images/home.jpg');background-size:cover;background-repeat:no-repeat;background-position:center;">
     <div id="app">

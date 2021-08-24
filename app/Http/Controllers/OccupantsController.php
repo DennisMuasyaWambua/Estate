@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\Occupant;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 use DataTables;
 use Validator;
 
@@ -16,8 +18,8 @@ class OccupantsController extends Controller
      */
     public function index()
     {
-       $occupants = Occupant::all();
-      return view('caretaker.dashboard',compact('occupants'));
+       $occupant = Occupant::all();
+      return route('Dashboard');
     }
 
     /**
@@ -77,8 +79,13 @@ class OccupantsController extends Controller
             $occupant->blockNumber = request('blockNumber');
             $occupant->flatNumber = request('flatNumber');
             $occupant->save();
+            $reset = Password::sendResetLink($request->only(['email']));
+            toastr()->success('Occupant added successfully');
+
+           
+           dd($reset);
             // return redirect('/Dashboard');
-            return redirect(route('Dashboard.allOccupants'));
+            return redirect(route('Dashboard'));
             // $occupant->caretakerId = $request->caretakerId;
             // $occupant->name = $request->name;
             // $occupant->email = $request->email;
@@ -107,8 +114,8 @@ class OccupantsController extends Controller
      */
     public function show($id)
     {   
-        $person = Occupant::find($id);
-       return view('caretaker.dashboard',compact('person'));
+        $Occupant = Occupant::find($id);
+       return view('partials.update',compact('Occupant'));
     }
 
     public function deleteShow($id){
@@ -125,10 +132,10 @@ class OccupantsController extends Controller
     public function edit($id)
     {
         //
-        $occupants = Occupant::all();
-        $occupant = $occupants->find($id);
+        $Occupant = Occupant::all();
+        $Occupant = $Occupant->find($id);
         //dd($occupant);
-        return view('caretaker.dashboard',compact('occupant'));
+        return view('partials.update',compact('Occupant'));
     }
 
     /**
@@ -140,15 +147,18 @@ class OccupantsController extends Controller
     public function update(Request $request)
     {
         //
-        $person = Occupant::find($request->id);
-        $person->name = $request->name;
-        $person->email = $request->email;
-        $person->phone = $request->phone;
-        $person->estate = $request->estate;
-        $person->blockNumber = $request->blockNumber;
-        $person->flatNumber = $request->flatNumber;
-        $person->save();
-        return redirect(route('Dashboard.allOccupants'));
+        
+        $Occupant = Occupant::find($request->id);
+        $Occupant->name = $request->name;
+        $Occupant->email = $request->email;
+        $Occupant->phone = $request->phone;
+        $Occupant->estate = $request->estate;
+        $Occupant->blockNumber = $request->blockNumber;
+        $Occupant->flatNumber = $request->flatNumber;
+        $Occupant->save();
+        return redirect(route("Dashboard"));
+        //return redirect(route('Dashboard'));
+
 
     }
 
@@ -162,12 +172,13 @@ class OccupantsController extends Controller
     {
         //deleting an occupant 
         Occupant::destroy($id);
-        return redirect(route('Dashboard.allOccupants'));
+        return redirect(route('Dashboard'));
         // dd($id);
     }
 
-    public function occupants(){
-        $occupants = Occupant::all();
-        return view('caretaker.dashboard')->with('occupants',$occupants);
-    }
+   public function getOccupantDetails(Request $request){
+       $id = $request->id;
+       $occupant = Occupant::find($id);
+       return response()->json(compact('occupant'));
+   }
 }

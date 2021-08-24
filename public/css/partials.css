@@ -1,0 +1,35 @@
+@import url(https://fonts.googleapis.com/css2?family=Kranky&display=swap);
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Kranky", cursive;
+    font-size: 18px;
+}
+.update-form{
+    position: absolute;
+    text-align: center;
+    width: 650px;
+    height: 650px;
+    left: 398px;
+    top: 10px;
+    background: rgba(229, 229, 229, 0.53);
+    border-radius: 143px;
+}
+.form-group-update label{
+    font-family: "Kranky", cursive;
+    font-size: 20px;
+    margin-left: 10%;
+}
+.form-group-update input{
+     margin: 10px;
+    text-align: center;
+    width: 520px;
+    position: relative;
+    left: 10px;
+    font-family: "Kranky", cursive;
+    font-size: 20px;
+    color: #fd9904;
+    border-radius:143px;
+    outline: none;
+}
+
