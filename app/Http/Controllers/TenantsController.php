@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use DataTables;
 use Validator;
 
-class OccupantsController extends Controller
+class TenantsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,7 @@ class OccupantsController extends Controller
     public function index()
     {
        $occupants = Occupant::all();
-      return view('caretaker.dashboard',compact('occupants'));
-      return view('landlord.dashboard',compact(occupants));
+      return view('landlord.dashboard',compact('occupants'));
     }
 
     /**
@@ -109,7 +108,7 @@ class OccupantsController extends Controller
     public function show($id)
     {   
         $person = Occupant::find($id);
-       return view('caretaker.dashboard',compact('person'));
+       return view('landlord.dashboard',compact('person'));
     }
 
     public function deleteShow($id){
@@ -129,7 +128,7 @@ class OccupantsController extends Controller
         $occupants = Occupant::all();
         $occupant = $occupants->find($id);
         //dd($occupant);
-        return view('caretaker.dashboard',compact('occupant'));
+        return view('landlord.dashboard',compact('occupant'));
     }
 
     /**
@@ -169,6 +168,6 @@ class OccupantsController extends Controller
 
     public function occupants(){
         $occupants = Occupant::all();
-        return view('caretaker.dashboard')->with('occupants',$occupants);
+        return view('landlord.dashboard')->with('occupants',$occupants);
     }
 }
