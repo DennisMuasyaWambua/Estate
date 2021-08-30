@@ -93,8 +93,8 @@
                     >
                         <div class="deadline-overlay"></div>
                         <div class="deadline-circle">
-                        <img src="{{asset('images/bank.png')}}" alt="" />
-                        <p>Payment Date</p>
+                        <img src="{{asset('images/service.png')}}" alt="" />
+                        <p>Queries Chatbox</p>
                         </div>
                     </a>
                 </div>

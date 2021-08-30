@@ -87,14 +87,13 @@
                 <div class="deadline">
                     <a
                         class="deadline-card"
-                        href="#billsModal"
-                        data-bs-toggle="modal"
-                        data-bs-target="#billsModal"
+                        href="{{ url('Dashboard/message') }}"
+                        
                     >
                         <div class="deadline-overlay"></div>
                         <div class="deadline-circle">
-                        <img src="{{asset('images/bank.png')}}" alt="" />
-                        <p>Payment Date</p>
+                        <img src="{{asset('images/service.png')}}" alt="" />
+                        <p>Queries Chatbox</p>
                         </div>
                     </a>
                 </div>

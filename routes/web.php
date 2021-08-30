@@ -43,6 +43,10 @@ Route::middleware(['web','role:caretaker'])->prefix('Dashboard')->group(function
     Route::post('/deleteOccupant/{id}',[OccupantsController::class,'destroy'])->name('Dashboard.deleteOccupant');
     Route::post('/updateOccupant/{id}',[OccupantsController::class,'edit'])->name('Dashboard.updateOccupant');
     Route::get('/editOccupant/{id}',[OccupantsController::class,'show'])->name('Dashboard.editOccupant');
+    
+    Route::get('/message', function () {
+        return view('Feedback.message');
+    });
 });
 
 Route::middleware(['web','role:landlord'])->prefix('Dashboard')->group(function(){
@@ -56,6 +60,9 @@ Route::middleware(['web','role:landlord'])->prefix('Dashboard')->group(function(
 // Route::middleware(['auth','role:occupant'])->prefix('Dashboard')->group)(function(){
    
 // });
+Route::get('message', function () {
+    return view('message');
+});
 
 
 
