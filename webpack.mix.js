@@ -11,7 +11,11 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
-    .sourceMaps();
+//mix.js('resources/js/app.js', 'public/js')
+   // .sass('resources/sass/app.scss', 'public/css')
+   // .sourceMaps();
 
+mix.js('resources/js2/app.js', 'public/js2')
+    .postCss('resources/css2/message.css', 'public/css2', [
+        //
+    ]);

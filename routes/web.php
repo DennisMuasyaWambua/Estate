@@ -47,6 +47,19 @@ Route::middleware(['web','role:caretaker'])->prefix('Dashboard')->group(function
     Route::get('/message', function () {
         return view('Feedback.message');
     });
+
+    Route::post('/send-message', function 
+    (Request $request){
+        event(
+            new Message(
+                $request->input('username'),
+                $request->input('message')
+            )
+        ); 
+        
+        return ["success" => true];
+    });
+    
 });
 
 Route::middleware(['web','role:landlord'])->prefix('Dashboard')->group(function(){
@@ -60,9 +73,6 @@ Route::middleware(['web','role:landlord'])->prefix('Dashboard')->group(function(
 // Route::middleware(['auth','role:occupant'])->prefix('Dashboard')->group)(function(){
    
 // });
-Route::get('message', function () {
-    return view('message');
-});
 
 
 
