@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CaretakerController;
 use App\Http\Controllers\OccupantsController;
+use App\Http\Controllers\payments\mpesa\MpesaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,13 +20,11 @@ use App\Http\Controllers\OccupantsController;
 Route::get('/', function () {
     return view('welcome');
 });
-// Route::get('/dashboard',function(){
-//     return view('dashboard.accountdashboard');
-// });
-
-// Route::group(['middleware' => ['auth']], function() { 
-//     Route::get('/dashboard', [DashboardController::class,'index']);
-// });
+//getting access token
+Route::get('/getAcccessToken',[MpesaController::class,'getAccessToken']);
+Route::post('/registerURL',[MpesaController::class,'registerURL']);
+Route::post('/simulate',[MpesaController::class,'simulateTransaction']);
+Route::post('/stkpush',[MpesaController::class,'stkPush']);
 
 
 //route to authentication for all user 

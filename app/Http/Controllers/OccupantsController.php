@@ -1,13 +1,15 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Models\Occupant;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use DataTables;
 use Validator;
+
+
 
 class OccupantsController extends Controller
 {
@@ -79,11 +81,16 @@ class OccupantsController extends Controller
             $occupant->blockNumber = request('blockNumber');
             $occupant->flatNumber = request('flatNumber');
             $occupant->save();
-            $reset = Password::sendResetLink($request->only(['email']));
+            User::create([
+                'name'=>$occupant->name, 
+                'email'=> $occupant->email,
+                'password'=>Hash::make('password')
+            ])->attachRole('occupant');
+            Password::sendResetLink($request->only(['email']));
             toastr()->success('Occupant added successfully');
 
            
-           dd($reset);
+          
             // return redirect('/Dashboard');
             return redirect(route('Dashboard'));
             // $occupant->caretakerId = $request->caretakerId;

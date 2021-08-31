@@ -402,32 +402,32 @@
                         flatNumber:$('#flatNumber').val()
                     };
                     
-                    var newOccupant = {
-                        name:$('#name').val(),
-                        email:$('#email').val(),
-                        password:'password',
-                        password_comfirmation:'password',
-                        role_id:'occupant'
+                    // var newOccupant = {
+                    //     name:$('#name').val(),
+                    //     email:$('#email').val(),
+                    //     password:'password',
+                    //     password_comfirmation:'password',
+                    //     role_id:'occupant'
 
-                    };
+                    // };
                    
                   
-                    //populating the form with data
+                    // //populating the form with data
                    
                    
-                    $.ajax({
-                        url:"/register",
-                        method:"post",
-                        data: newOccupant,
-                        headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                        success: function (data) {
-                                console.log("data:\n");
-                                console.log(data);
-                        },
-                        error:function(result){
-                            console.log(result);
-                        }
-                    });
+                    // $.ajax({
+                    //     url:"/register",
+                    //     method:"post",
+                    //     data: newOccupant,
+                    //     headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    //     success: function (data) {
+                    //             console.log("data:\n");
+                    //             console.log(data);
+                    //     },
+                    //     error:function(result){
+                    //         console.log(result);
+                    //     }
+                    // });
                    
                     $.ajax(
                             {

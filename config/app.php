@@ -234,5 +234,15 @@ return [
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Toastr'  => Brian2694\Toastr\Facades\Toastr::class,
     ],
-
+    'debug_blacklist'=>[
+        '_ENV'=>[
+            'MPESA_CONSUMER_KEY' ,
+            'MPESA_CONSUMER_SECRET',
+            'MPESA_STK_SHORT_CODE',
+            'MPESA_ENV',
+            'MPESA_TEST_MISSION',
+            'MPESA_TEST_URL',
+            'MPESA_PASSKEY'
+        ]
+    ]
 ];
