@@ -28,24 +28,36 @@ class MpesaResponsesController extends Controller
         toastr()->success('Stk received successfully');
         Log::info($request->all());
         Log::info($request->Body['stkCallback']['ResultDesc']);
-        //inserting the record into the database
-        $id = Auth::id(); 
-        $caretakerId = DB::table('occupants')->where('id',$id);
-        $json = json_encode($request->all());
-        $data = json_decode($json,true);
-        Log::info($json);
 
-       $payment =  DB::table('payments')->insert([
-            'Sender_id'=>$id,
-            'Recepient_id'=>$caretakerId,
-            'Mpesa_recipient_number'=>$data['stkCallback']['CallbackMetadata']['Item'][1]['value'],
-            'Amount'=>$data['stkCallback']['CallbackMetadata']['Item'][0]['value']
-        ]);
+        $response = json_encode($request->all());
+        $data = json_decode($response,true);
+        $amount = $data['Body']['stkCallback']['CallbackMetadata']['Item'][0]['Value'];
+        $receiptNumber = $data['Body']['stkCallback']['CallbackMetadata']['Item'][1]['Value'];
+        $Amount = json_encode($amount);
+        $ReceiptNumber = json_encode($receiptNumber); 
+        Log::info($Amount);
+        Log::info($ReceiptNumber);
 
-        // Log::info($request->Body['CallbackMetadata']['Item']['o']['Value']);
-        // Log::info($request->Body->CallbackMetadata->Item->1->Value);
-        return $payment;
+        $acceptance = $request->Body['stkCallback']['ResultDesc'];
+        if($acceptance=='The service request is processed successfully.'){
+            // getting logged in users email
+            $user = Auth::user();
+            $email = $user->email;
+            //sql queries to get occupant_id and caretaker_id from the occupants table 
+            $occupant_id = DB::table('occupant')->select('id')->where('email','=',$email)->get();
+            $caretaker_id = DB::table('occupant')->select('caretakerID')->where('email','=',$email)->get();
     
+    
+            $store = DB::table('create_occupant_payments')->insert(['sender_id'=>$occupant_id,'recepient_id'=>$caretaker_id,'receipt_id'=>$ReceiptNumber,'amount'=>$Amount]);
+            return $store;
+        }else{
+            Log::info($acceptance);
+            return $acceptance;
+        }
+
+        
+       
+
     }
 
     public function confirmation(Request $request){
