@@ -4,6 +4,12 @@ namespace App\Http\Controllers\payments\mpesa;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\Occupant;
+use App\Models\Payments;
+
+use Session;
 
 class MpesaController extends Controller
 {
@@ -43,11 +49,42 @@ class MpesaController extends Controller
           );
           $url = '/stkpush/v1/processrequest';
 
-        $response = $this->makeHttp($url, $curl_post_data);
-
+          $response = $this->makeHttp($url, $curl_post_data);
+          $data = json_decode($response,true);
+          $checkout = $data['CheckoutRequestID'];
+          $email = Auth::user()->email;
+          //store the users email in a session 
+          $usersEmail = session(['email'=>$email]);
+          $data = $request->session()->all();
+          
+          dd($data);
+          $amount = $request->amount;
+          $sender_id = DB::table('occupants')->select('id')->where('email','=', $email)->value('id');
+      
+        //   $sender_id = json_decode($sender_id,true);
+        //  $sEmail = Occupant::find($sender_id);
+        //  dd($sEmail['email']);
+          $recepient_id = DB::table('occupants')->select('caretakerId')->where('email','=', $email)->value('id');
+          //storing transaction instance in the database
+         $store =  DB::table('payments')->insert(['checkout_id'=>$checkout,'sender_id'=>$sender_id,'recepient_id'=>$recepient_id,'amount'=>$amount]);
+         
+        //   $payment = new Payment();
+        //   $payment->checkout_id = $checkout
+        //   $payment->sender_id = $sender_id;
+        //   $payment->recepient = $recepient_id;
+        //   $payment->amount = $amount;
+        //   $payment->save()
         return $response;
 
     }
+    public function getPayments(){
+        $payments = DB::table('payments')->select('status')->where('status','=','paid')->count();
+        return $payments;
+   }
+   public function getPendingpayments(){
+    $payments = DB::table('payments')->select('status')->where('status','=','pending')->count();
+    return $payments;
+   }
     //simulate transaction
     public function simulateTransaction(Request $request){
         $body = array(

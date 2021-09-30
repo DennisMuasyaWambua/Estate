@@ -26,7 +26,11 @@ class DashboardController extends Controller
         }elseif(Auth::user()->hasRole('user')){
             return view('user.dashboard');
         }elseif(Auth::user()->hasRole('occupant')){
+            $id = Auth::id();
+            session(['occupant-id'=>$id]);
             return view('occupant.dashboard');
+        }else{
+            return redirect('/');
         }
     }
     //return dashboard view
@@ -44,6 +48,7 @@ class DashboardController extends Controller
 
     //common auth login
     public function login(){
+        
         return view('auth.login');
     }
 

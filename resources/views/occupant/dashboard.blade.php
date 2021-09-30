@@ -1,5 +1,6 @@
 @extends('occupant.occupantTemplate')
     @section('content')
+    
     <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{asset('sweetalert2/sweetalert2.min.css')}}">
@@ -93,6 +94,8 @@
            //to get access token
            document.getElementById('pay').addEventListener('click',(event)=>{event.preventDefault()
                 axios.get('/getAcccessToken',{}).then((response)=>{console.log(response.data);}).catch((error)=>{console.log(error);})
+                 
+
            })
 
         //    //to register a url
@@ -133,9 +136,14 @@
                 axios.post('/stkpush',requestBody)
                 .then(
                     (response)=>{
+                        console.log(response);
+                        console.log(response.data.CheckoutRequestID);
+                        const id = response.data.CheckoutRequestID;
+                        // {{session()->put('checkoutID','id')}}
                         console.log(response.data);
-                        toastr.success("request made successfully check your phone");
                        
+                        toastr.success("request made successfully check your phone");
+                        
                     }
                     )
                 .catch(

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\DB;
 use DataTables;
 use Validator;
 
@@ -183,9 +184,5 @@ class OccupantsController extends Controller
         // dd($id);
     }
 
-   public function getOccupantDetails(Request $request){
-       $id = $request->id;
-       $occupant = Occupant::find($id);
-       return response()->json(compact('occupant'));
-   }
+  
 }

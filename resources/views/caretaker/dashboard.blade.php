@@ -74,7 +74,7 @@
                         href="#service-charge"
                         class="serviceCharge"
                         data-bs-toggle="modal"
-                        data-bs-target="#rentserviceModal"
+                        data-bs-target="#serviceChargePaymentData"
                     >
                         <div class="accounts-overlay"></div>
                         <div class="accounts-circle">
@@ -372,7 +372,31 @@
                     <small><p class="login-card-footer-text">Alredy have an account? <a href="{{ route('login') }}" class="text-reset"id="register-login">Login here</a></p></small>
                 </div>
             
-        </form>
+            </form>
+
+            <!-- reading payment data from the occupants -->
+            <div class="modal fade" id="serviceChargePaymentData" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Service Charge Payment </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="totalPaid">
+                                <small>Total paid : </small>
+                                <small id="paidValue"></small>
+                                <form action="{{route('Dashboard.payments')}}" method="GET" id="getPayments"></form>
+                            </div>
+                            <div id="totalUnpaid">
+                                <small>Total unpaid : </small>
+                                <small id="unpaidValue"></small>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
             <script src="{{asset('datatable/js/jquery.dataTables.min.js')}}"></script>
             <script src="{{asset('datatable/js/dataTables.bootstrap4.min.js')}}"></script>
             <script src="{{asset('sweetalert2/sweetalert2.min.js')}}"></script>
@@ -402,32 +426,7 @@
                         flatNumber:$('#flatNumber').val()
                     };
                     
-                    // var newOccupant = {
-                    //     name:$('#name').val(),
-                    //     email:$('#email').val(),
-                    //     password:'password',
-                    //     password_comfirmation:'password',
-                    //     role_id:'occupant'
-
-                    // };
-                   
-                  
-                    // //populating the form with data
-                   
-                   
-                    // $.ajax({
-                    //     url:"/register",
-                    //     method:"post",
-                    //     data: newOccupant,
-                    //     headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                    //     success: function (data) {
-                    //             console.log("data:\n");
-                    //             console.log(data);
-                    //     },
-                    //     error:function(result){
-                    //         console.log(result);
-                    //     }
-                    // });
+                    
                    
                     $.ajax(
                             {
@@ -447,11 +446,37 @@
                             }
                         )
                     });
-                    
-                   
-               
-            });
+                });
+            $('#service-charge').on('click',function(e){
+                      e.preventDefault();
             
+                    $.ajax({
+                        url:  "Dashboard/payments",
+                        method: 'get',
+                        headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        success: function (data) {
+                            console.log("data:\n");
+                            console.log(data);
+                            $('#paidValue').html(data);                                       
+                        },
+                        error: function (result) {
+                            console.log(result);   
+                        }
+                    });
+                    $.ajax({
+                        url:  "Dashboard/pending",
+                        method: 'get',
+                        headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        success: function (data) {
+                            console.log("data:\n");
+                            console.log(data);
+                            $('#unpaidValue').html(data);                                       
+                        },
+                        error: function (result) {
+                            console.log(result);   
+                        }
+                    });
+            });
       
                    
         </script>

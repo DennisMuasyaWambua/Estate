@@ -39,6 +39,8 @@ Route::middleware(['web','role:caretaker'])->prefix('Dashboard')->group(function
     Route::post('/deleteOccupant/{id}',[OccupantsController::class,'destroy'])->name('Dashboard.deleteOccupant');
     Route::post('/updateOccupant/{id}',[OccupantsController::class,'update'])->name('Dashboard.updateOccupant');
     Route::get('/editOccupant/{id}',[OccupantsController::class,'edit'])->name('Dashboard.editOccupant');
+    Route::get('/payments',[MpesaController::class,'getPayments'])->name('Dashboard.payments');
+    Route::get('/pending',[MpesaController::class,'getPendingpayments'])->name('Dashboard.pending');
 });
 // Route::middleware(['auth','role:occupant'])->prefix('Dashboard')->group)(function(){
    

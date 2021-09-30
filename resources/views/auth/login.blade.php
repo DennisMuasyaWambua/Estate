@@ -10,6 +10,7 @@
                     <div class="form-group">
                                 <label for="email" class="sr-only">Email</label>
                                 <input type="email" name="email" id="email" class="form-control @error('name') is-invalid @enderror" placeholder="Email address">
+                                {{session(['userEmail'=>'email'])}}
                                 @error('email')
                                     <span class="invalid-feedback is-invalid" role="alert">
                                         <strong>{{ $message }}</strong>

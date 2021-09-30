@@ -35,6 +35,10 @@
                     
                 </div>
             <p>{{auth()->user()->name}}</p>
+            
+                
+           {{session()->put('userEmail',auth()->user()->email)}}
+           
             <nav id="top-bar">
                 <div class="nav-container">
                     <ul>
