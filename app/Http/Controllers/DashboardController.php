@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         if(Auth::user()->hasRole('admin')){
             return view('admin.dashboard');
         }elseif(Auth::user()->hasRole('landlord')){
@@ -28,6 +28,8 @@ class DashboardController extends Controller
         }elseif(Auth::user()->hasRole('occupant')){
             $id = Auth::id();
             session(['occupant-id'=>$id]);
+            $value = $request->cookie('token');
+          
             return view('occupant.dashboard');
         }else{
             return redirect('/');
@@ -48,6 +50,7 @@ class DashboardController extends Controller
 
     //common auth login
     public function login(){
+        
         
         return view('auth.login');
     }
@@ -71,5 +74,7 @@ class DashboardController extends Controller
     public function userDashboard(){
         return view('user.userDashboard');
     }
+    
+    
     
 }

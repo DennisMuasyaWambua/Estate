@@ -23,7 +23,8 @@
 
     <!-- local javascript -->
     <script src="{{asset('js/navigationBar.js')}}"></script>
-    <!-- jquery -->
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
    
     <!-- sweet alert 2 -->
     

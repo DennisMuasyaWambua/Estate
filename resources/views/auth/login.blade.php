@@ -2,7 +2,7 @@
     @section('content')
         <div class="conatiners">
             
-                <form method="POST" action="{{route('login')}}">
+                <form id="loginForm" method="POST" action="{{route('login')}}">
                     @csrf
                 <img src="{{asset('images/smart1.jpeg')}}" style="border-radius: 150px; width:200px;height:200px;" >
                 <div class="login-title"><p>SMART ESTATE</p></div>
@@ -32,4 +32,25 @@
                 </form>
            
         </div>
+        <script>
+           
+             document.getElementById("login").addEventListener('click', (event)=>{
+                 event.preventDefault();
+                 const Data = {
+                     email:document.getElementById('email').value,
+                     password: document.getElementById('password').value
+                 };
+                // console.log(Data.email);
+                
+                 axios.post('/token',Data).then((response)=>{console.log(response.data);}).catch((error)=>{console.log(error);}); 
+                
+
+                 document.getElementById('loginForm').submit();
+             });
+                
+                // let see = sessionStorage.getItem('access_token');
+                //     console.log(see);
+            
+            
+        </script>
     @endsection

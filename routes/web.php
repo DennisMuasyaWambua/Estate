@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CaretakerController;
 use App\Http\Controllers\OccupantsController;
 use App\Http\Controllers\payments\mpesa\MpesaController;
+use App\Http\Controllers\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::post('/stkpush',[MpesaController::class,'stkPush']);
 //route to authentication for all user 
 Route::get('/auth',[DashboardController::class,'login']);
 Route::get('/auth/forgot-password',function(){return view('auth.forgot-password');});
+Route::post('/token',[ApiController::class,'authenticate']);
 //delta route to all other pages 
 Route::get('/Dashboard',[DashboardController::class,'index'])->name('Dashboard');
 

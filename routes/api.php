@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\payments\mpesa\MpesaController;
 use App\Http\Controllers\payments\mpesa\MpesaResponsesController;
+use App\Http\Controllers\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,9 @@ use App\Http\Controllers\payments\mpesa\MpesaResponsesController;
 Route::post('/validation',[MpesaResponsesController::class,'validation']);
 Route::post('/confirmation',[MpesaResponsesController::class,'confirmation']);
 Route::post('/stkpush',[MpesaResponsesController::class,'stkPush']);
+Route::post('/token',[ApiController::class,'authenticate']);
+Route::post('/register',[MpesaResponsesController::class,'registerUser']);
+Route::group(['middleware' => ['jwt.verify']], function(){
+    Route::get('/getUser',[ApiController::class,'get_user']);
+});
+Route::get('/getCookie',[MpesaResponsesController::class,'getCookie']);

@@ -25,7 +25,8 @@
             <p>Service Charge</p>
             </div>  
         </a>
-
+       
+       
             <!-- payment history modal -->
             <div class="modal fade" id="serviceChargeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -73,6 +74,7 @@
                                                 <label for="account">Account</label>
                                                 <input type="text" name="account" class="form-control" id="account">
                                             </div>
+                                            
                                             <button id="prompt" style="float:right;" class="btn btn-primary">Pay Service Charge</button>
                                    </form>
                                   
@@ -91,6 +93,8 @@
             <script src="{{ asset('toastr/toastr.min.js') }}"></script>
             <script src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
        <script>
+            
+           
            //to get access token
            document.getElementById('pay').addEventListener('click',(event)=>{event.preventDefault()
                 axios.get('/getAcccessToken',{}).then((response)=>{console.log(response.data);}).catch((error)=>{console.log(error);})
@@ -98,30 +102,7 @@
 
            })
 
-        //    //to register a url
-        //    document.getElementById('register_url').addEventListener('click',(event)=>{ event.preventDefault()
-        //    axios.post('/registerURL', {})
-        //    .then(
-        //        (response)=>{console.log(response.data);}
-        //        )
-        //    .catch(
-        //        (error)=>{console.log(error);})
-        //     })
-
-        //     //to simulate a transaction
-        //     document.getElementById('simulate_transaction').addEventListener('click',(event)=>{event.preventDefault()
-        //         const requestBody = {
-        //             amount: document.getElementById('amount').value,
-        //             account: document.getElementById('account').value
-        //         }
-        //         axios.post('/simulate',requestBody)
-        //         .then(
-        //             (response)=>{console.log(response.data);}
-        //             )
-        //         .catch(
-        //                 (error)=>{console.log(error);
-        //                 })
-        //     })
+     
 
             //make stk push
             document.getElementById('prompt').addEventListener('click',(event)=>{
@@ -130,9 +111,13 @@
                 const requestBody = {
                     phone: document.getElementById('phone').value,
                     amount: document.getElementById('amount').value,
-                    account: document.getElementById('account').value,
+                    account: document.getElementById('account').value
                     
-                }
+                };
+                
+               
+
+
                 axios.post('/stkpush',requestBody)
                 .then(
                     (response)=>{
