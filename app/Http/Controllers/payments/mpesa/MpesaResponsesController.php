@@ -73,9 +73,7 @@ class MpesaResponsesController extends Controller
         
         
                 $store = DB::table('occupant_payments')->insert(['checkout_id'=>$checkoutID,'sender_id'=>$o_id,'recepient_id'=>$c_id,'receipt_id'=>$ReceiptNumber,'amount'=>$Amount,'created_at'=>DB::raw('CURRENT_TIMESTAMP')]);
-                Log::info($store);
-
-                
+                Log::info($store);  
 
 
 
@@ -84,12 +82,9 @@ class MpesaResponsesController extends Controller
 
           
             
-           
-    
-    
+            
             //$store = DB::table('occupant_payments')->insert(['checkout_id'=>$checkoutID,'sender_id'=>$o_id,'recepient_id'=>$c_id,'receipt_id'=>$ReceiptNumber,'amount'=>$Amount]);
-
-            return $store;
+                return $store;
             }else{
                 return $response;
             }

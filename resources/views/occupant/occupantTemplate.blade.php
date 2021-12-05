@@ -31,7 +31,8 @@
     <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{asset('sweetalert2/sweetalert2.min.css')}}">
     <link rel="stylesheet" href="{{asset('toastr/toastr.min.css')}}">
-    
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body style="background-image:url('/images/dine.jpg');background-size:cover;background-repeat:no-repeat;background-position:center;">
     <div class="container">

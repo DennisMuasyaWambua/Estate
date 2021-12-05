@@ -6,6 +6,8 @@ use App\Http\Controllers\CaretakerController;
 use App\Http\Controllers\OccupantsController;
 use App\Http\Controllers\payments\mpesa\MpesaController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\AdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,8 @@ Route::post('/registerURL',[MpesaController::class,'registerURL']);
 Route::post('/simulate',[MpesaController::class,'simulateTransaction']);
 Route::post('/stkpush',[MpesaController::class,'stkPush']);
 
+//routes for the admin
+Route::get('/admin',[AdminController::class,'index'])->name('admin');
 
 //route to authentication for all user 
 Route::get('/auth',[DashboardController::class,'login']);
@@ -43,10 +47,15 @@ Route::middleware(['web','role:caretaker'])->prefix('Dashboard')->group(function
     Route::get('/editOccupant/{id}',[OccupantsController::class,'edit'])->name('Dashboard.editOccupant');
     Route::get('/payments',[MpesaController::class,'getPayments'])->name('Dashboard.payments');
     Route::get('/pending',[MpesaController::class,'getPendingpayments'])->name('Dashboard.pending');
+    Route::get('/accounts',[MpesaController::class,'getAccounts'])->name('accounts');
+    Route::post('/accountDetails',[CaretakerController::class,'getAccountDetails'])->name('Dashboard.accountDetails');
 });
 // Route::middleware(['auth','role:occupant'])->prefix('Dashboard')->group)(function(){
-   
+Route::get('/paid',[OccupantsController::class,'paymentHistory'])->name('paid');
 // });
+Route::middleware(['web','role:occupant'])->prefix('Dashboard')->group(function(){
+   Route::get('/paymentHistory',[OccupantsController::class,'getPaymentRecord'])->name('paymentHistory');
+});
 
 
 

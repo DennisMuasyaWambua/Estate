@@ -1,14 +1,15 @@
 <?php
 namespace App\Http\Controllers;
-use App\Models\Occupant;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\DB;
-use DataTables;
 use Validator;
+use DataTables;
+use App\Models\User;
+use App\Models\Occupant;
+use Illuminate\Http\Request;
+use App\Models\PaymentHistory;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 
 
 
@@ -36,7 +37,7 @@ class OccupantsController extends Controller
         //create a new occupant
         $occpant = new Occupant();
         $occupant->caretakerId = request('caretakerId');
-        $occpant->name = request('name');
+        $occupant->name = request('name');
         $occupant->email = request('email');
         $occupant->phone = request('phone');
         $occupant->estate = request('estate');
@@ -182,6 +183,21 @@ class OccupantsController extends Controller
         Occupant::destroy($id);
         return redirect(route('Dashboard'));
         // dd($id);
+    }
+    public function getpaymentRecord(){
+        $email = Auth::user()->email;
+        $id = DB::table('occupants')->select('id')->where('email','=',$email)->value('id');
+        $paymentsMade = DB::table('occupant_payments')->select('receipt_id','amount','created_at')->where('sender_id','=',$id)->get();
+        return $paymentsMade;
+    }
+    
+    public function paymentHistory(){
+        $email = Auth::user()->email;
+        $id = DB::table('occupants')->select('id')->where('email','=',$email)->value('id');
+        // $paymentsMade = DB::table('occupant_payments')->select('receipt_id','amount','created_at')->where('sender_id','=',$id)->get();
+        // return $paymentsMade;
+        $o_id = PaymentHistory::all();
+        dd($o_id);
     }
 
   

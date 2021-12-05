@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{asset('sweetalert2/sweetalert2.min.css')}}">
     <link rel="stylesheet" href="{{asset('toastr/toastr.min.css')}}">   
        <div class="cards">
-           <a class="service-charge" data-bs-toggle="modal"data-bs-target="#serviceChargeModal">
+           <a id="service-charge" class="service-charge" data-bs-toggle="modal"data-bs-target="#serviceChargeModal">
                <div class="service-overlay"></div>
                 <div class="service-circle">
                     <img src="{{asset('images/payment-history.png')}}" alt=""/>
@@ -33,10 +33,25 @@
                     <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLongTitle">Payments made</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button id="clear" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </button>
                     </div>
                     <div class="modal-body">
+                        <section id="payment-history">
+                                <table class="table" id="history">
+                                    <thead class="table-dark">
+                                     
+                                        <th id="receive">Recepient id</th>
+                        
+                                        <th id="amount">Amount</th>
+                        
+                                        <th id="status">Paid at</th>
+                                    </thead>
+                                    <tbody id="records">
+                                      
+                                    </tbody>
+                                </table>
+                        </section>
                         
                     </div>
                     <div class="modal-footer">
@@ -87,6 +102,7 @@
             </div>
             
        </div>
+       <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
             <script src="{{asset('datatable/js/jquery.dataTables.min.js')}}"></script>
             <script src="{{asset('datatable/js/dataTables.bootstrap4.min.js')}}"></script>
             <script src="{{asset('sweetalert2/sweetalert2.min.js')}}"></script>
@@ -136,5 +152,62 @@
                             toastr.error("please check your network");
                         })
             })
+            document.getElementById('service-charge').addEventListener('click',(event)=>{
+                event.preventDefault();
+                axios.get('Dashboard/paymentHistory').then((response)=>{
+                    //display the data on the table 
+                    //column variables
+                    //document.getElementById('history').remove();
+                   
+                        
+                  
+                    
+                    console.log(response.data);
+                    var myData = response.data;
+                    buildTable(myData);
+                    function buildTable(data){
+                        document.getElementById('clear').addEventListener('click',(event)=>{
+                        event.preventDefault();
+                            var table = document.getElementById('history');
+                             table.innerHTML="";
+                             var table = document.getElementById('history');
+                                var head = `
+                                        <thead class="table-dark">
+                                            
+                                            <th id="receive">Recepient id</th>
+                            
+                                            <th id="amount">Amount</th>
+                            
+                                            <th id="status">Paid at</th>
+                                        </thead>
+                                    `
+                                    table.innerHTML += head;
+                           
+                        })
+                        
+                        for(var i=0;i<data.length;i++){
+                            
+                            var table = document.getElementById('history');
+                            
+                            var row=`<tr id="records" class="table-dark">
+                                    <td>${data[i].receipt_id}</td>
+                                    <td>${data[i].amount}</td>
+                                    <td>${data[i].created_at}</td>
+                                 </tr>
+                                `
+                               
+                                table.innerHTML += row;
+                               
+                            
+                        }
+                        
+                    }
+                   
+                  
+                    }).catch((error)=>{console.log(error)});
+
+             
+            });
        </script>
+
     @endsection

@@ -2,35 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\caretaker;
 use App\Models\User;
+use App\Models\caretaker;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CaretakerController extends Controller
 {
-    //bring the caretakers dashboard into view 
-    public function index(){
-      $users = DB::table('role_user')->where('role_id','=',6)
-      ->join('roles', 'role_user.role_id', '=', 'roles.id')
-      ->join('users', 'role_user.role_id', '=', 'users.id')
-      ->select('users.name','users.email', 'roles.display_name')
-      ->get();
-      return view('caretaker.dashboard')->with('users',$users);
-    }
-    //controll caretaker functionality
-    
-  
-    //function to make a user to be an occupant
-    public function makeUserOccupant($email){
-      $occupant = User::find($email);
-      $occupant->attachRole('occupant');
+    //this controller brings into view the different caretakers registerd in the system to the admin and various caretaker operations
+    public function viewCaretakers(){
+      $caretakers = DB::table('role_user')->where('role_id','=','3')->get();
+      return $caretakers;
     }
 
-    //to search for a user
-    public function searchforUser($name){
-      $user = User::find($name);
-      return view('caretaker.dashboard')->with('user',$user);
+    //adding mpesa account number and paybill number
+    public function getAccountDetails(Request $request){
+      $accountNumber = $request->accountNumber;
+      $paybillNumber = $request->paybillNumber;
+      $id = Auth::id();
+      //checking whether the caretaker is present in the database
+      $dup = DB::table('caretaker_accounts')->select('caretaker_id')->get();
+      //storing the accountDetails
+      $store = DB::table('caretaker_accounts')->insert(['caretaker_id'=>$id,'account_number'=>$accountNumber,'paybill_number'=>$paybillNumber,"created_at" =>  date('Y-m-d H:i:s'),"updated_at" => date('Y-m-d H:i:s'),]);
+      return redirect(route('Dashboard'));
     }
-    
+
+     public function deleteCaretaker(Request $request){
+      //deleting the caretaker by the admin
+     }
+     //to view all the caretakers in the system
+     public function readCaretakers(Request $request){
+        //perform sql joins on the role_user table to  get the list of caretakers
+      
+     } 
+
 }

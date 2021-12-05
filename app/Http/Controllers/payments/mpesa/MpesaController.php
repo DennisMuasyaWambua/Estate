@@ -36,7 +36,7 @@ class MpesaController extends Controller
         $password = base64_encode(env('MPESA_SHORTCODE').env('MPESA_PASS_KEY').$timestamp);
         $curl_post_data = array(
             'BusinessShortCode' => env('MPESA_SHORTCODE'),
-            'Password' => $password,
+            'Password' => $password,  
             'Timestamp' => $timestamp,
             'TransactionType' => 'CustomerPayBillOnline',
             'Amount' => $request->amount,
@@ -72,7 +72,7 @@ class MpesaController extends Controller
 
     }
     public function getPayments(){
-        $payments = DB::table('payments')->select('status')->where('status','=','paid')->count();
+        $payments = DB::table('occupant_payments')->count();
         return $payments;
    }
    public function getPendingpayments(){
@@ -120,5 +120,10 @@ class MpesaController extends Controller
         $curl_response = curl_exec($curl);
         curl_close($curl);
         return $curl_response;
+    }
+    public function getAccounts(){
+        $payments = DB::table('occupant_payments')->count();
+        $pendingPayments = DB::table('payments')->select('status')->where('status','=','pending')->count();
+        return $accounts= array('paid'=>$payments,'unpaid'=>$pendingPayments);
     }
 }

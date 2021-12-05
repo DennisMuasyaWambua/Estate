@@ -4,7 +4,8 @@
     <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{asset('sweetalert2/sweetalert2.min.css')}}">
-    <link rel="stylesheet" href="{{asset('toastr/toastr.min.css')}}">   
+    <link rel="stylesheet" href="{{asset('toastr/toastr.min.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script> 
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="40"
@@ -35,15 +36,23 @@
         <p>{{auth()->user()->name}}</p>
         <nav id="top-bar">
             <div class="nav-container">
+                <form action="{{route('Dashboard.accountDetails')}}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="account-number">Account Number</label>
+                        <input class="form-control" type="text" name="accountNumber" placeholder="Account Number">
+                    </div>
+                    <div class="form-group">
+                        <label for="paybill-number">Paybill Number</label>
+                        <input class="form-control" type="text" name="paybillNumber" placeholder="Paybill Number">
+                    </div>
+                    <button type="submit " class="btn btn-sm btn-success" style="margin-top:10px">Set Account details</button>
+                    
+                </form>
             <ul>
                     <li class="nav-item"><a href="{{ route('logout') }}" class="nav-link underline"onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a></li>
             </ul>
-            <form class="d-flex" method="GET" action="">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            
-            </div>
+           
         </nav>
         @auth     
             <form id="logout-form" method="POST" action="{{route('logout')}}" >@csrf</form>
@@ -89,7 +98,7 @@
                         class="deadline-card"
                         href="#billsModal"
                         data-bs-toggle="modal"
-                        data-bs-target="#billsModal"
+                        data-bs-target="#dead"
                     >
                         <div class="deadline-overlay"></div>
                         <div class="deadline-circle">
@@ -382,16 +391,36 @@
                             <h5 class="modal-title" id="exampleModalCenterTitle">Service Charge Payment </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+                        <div class="modal-body" width="50%" height="50%">
+                            
+                                <div id="totalPaid">
+                                    <small>Total paid : </small>
+                                    <small id="paidValue"></small>
+                                    <form action="{{route('Dashboard.payments')}}" method="GET" id="getPayments"></form>
+                                </div>
+                                <div id="totalUnpaid">
+                                    <small>Total unpaid : </small>
+                                    <small id="unpaidValue"></small>
+                                </div>
+
+                                <canvas id="mychart" ></canvas>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- payment date setter -->
+            <div class="modal fade" id="dead" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Deadline Setter </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
                         <div class="modal-body">
-                            <div id="totalPaid">
-                                <small>Total paid : </small>
-                                <small id="paidValue"></small>
-                                <form action="{{route('Dashboard.payments')}}" method="GET" id="getPayments"></form>
-                            </div>
-                            <div id="totalUnpaid">
-                                <small>Total unpaid : </small>
-                                <small id="unpaidValue"></small>
-                            </div>
+                            
+                                
                         </div>
                         
                     </div>
@@ -459,7 +488,7 @@
                         success: function (data) {
                             console.log("data:\n");
                             console.log(data);
-                            $('#paidValue').html(data);                                       
+                         let paid =   $('#paidValue').html(data);                                    
                         },
                         error: function (result) {
                             console.log(result);   
@@ -472,10 +501,43 @@
                         success: function (data) {
                             console.log("data:\n");
                             console.log(data);
-                            $('#unpaidValue').html(data);                                       
+                          let unpaid =  $('#unpaidValue').html(data);                                       
                         },
                         error: function (result) {
                             console.log(result);   
+                        }
+                    });
+
+                    //creating a chart to represent the data 
+                    $.ajax({
+                        url:"Dashboard/accounts",
+                        method:'get',
+                        headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        success: function(data){
+                            console.log(data);
+                            //chart.js
+                            let mychart = document.getElementById('mychart').getContext('2d');
+                            let popChart = new Chart(mychart,{
+                                type:'pie',
+                                data:{
+                                    labels:['paid','unpaid'],
+                                    datasets:[{
+                                        label:'Accounts',
+                                        data:[data.paid,data.unpaid],
+                                        backgroundColor:['green','red']
+                                    }],
+                                   
+                                },
+                                options:{
+                                    title:{
+                                        display:true,
+                                        text:'Service Charge  accounts'
+                                    }
+                                }
+                            });
+                        },
+                        error:function(result){
+                            console.log(result);
                         }
                     });
             });
