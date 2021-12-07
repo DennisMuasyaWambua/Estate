@@ -59,7 +59,7 @@ class OccupantsController extends Controller
         
        $validator = Validator::make($request->all(),[
             'name'=>'required',
-            'email'=>'required',
+            'email'=>'required|email',
             'phone'=>'required',
             'estate'=>'required',
             'blockNumber'=>'required',
@@ -88,8 +88,11 @@ class OccupantsController extends Controller
                 'email'=> $occupant->email,
                 'password'=>Hash::make('password')
             ])->attachRole('occupant');
-            Password::sendResetLink($request->only(['email']));
+
+           $pswd = Password::sendResetLink($request->only(['email']));
+           dd($pswd);
             toastr()->success('Occupant added successfully');
+
 
            
           

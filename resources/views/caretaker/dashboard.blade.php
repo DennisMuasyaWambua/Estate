@@ -1,6 +1,7 @@
 @extends('caretaker.caretakerTemplate')
    
     @section('content')
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{asset('sweetalert2/sweetalert2.min.css')}}">
