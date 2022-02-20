@@ -26,14 +26,14 @@ body {
 .title p {
     color: #fd9904;
     font-family: "Kranky", cursive;
-    margin-left: 30%;
+    text-align: center;
     margin-top: 10px;
     font-size: 60px;
 }
 .message p {
     font-family: "Kranky", cursive;
     font-size: 50px;
-    margin-left: 10%;
+    text-align: center;
     margin-top: 30px;
 }
 #registrationModal {
@@ -101,16 +101,14 @@ form {
     border: 1px solid #fd9904;
     position: relative;
     width: 600px;
-    height: 650px;
-    left: 300px;
+    height: auto;
     background: rgba(229, 229, 229, 0.53);
     border-radius: 143px;
-    margin: 50px;
+    margin: 50px, 50px, 0px, 0px;
 }
 .form-group label {
     font-family: "Kranky", cursive;
     font-size: 20px;
-    margin-left: 10%;
 }
 form .login-title p {
     color: #fd9904;
@@ -136,6 +134,7 @@ form img {
     padding: 10px;
     width: 300px;
     text-align: center;
+    
     background: #fd9904;
     border-radius: 100px;
     border: none;
@@ -143,13 +142,18 @@ form img {
     font-size: 20px;
     position: relative;
 }
-#register-link {
+#loginlabel{
+    align-items: center;
+}
+#form-link {
     position: absolute;
     left: 200px;
-    top: 530px;
     align-items: center;
     text-align: center;
     text-indent: 0%;
+    font-family: "Kranky", cursive;
+    font-size: 30px;
+    color: #fd9904;
 }
 a {
     font-family: "Kranky", cursive;
@@ -177,6 +181,9 @@ a:hover {
 }
 .redirection {
     margin: 10px;
+    font-family: "Kranky", cursive;
+    font-size: 30px;
+    color: #fd9904;
 }
 #register-login {
     font-size: 18px;
