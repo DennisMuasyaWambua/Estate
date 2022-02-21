@@ -49,12 +49,15 @@ Route::middleware(['web','role:caretaker'])->prefix('Dashboard')->group(function
     Route::get('/pending',[MpesaController::class,'getPendingpayments'])->name('Dashboard.pending');
     Route::get('/accounts',[MpesaController::class,'getAccounts'])->name('accounts');
     Route::post('/accountDetails',[CaretakerController::class,'getAccountDetails'])->name('Dashboard.accountDetails');
+    Route::post('/setServiceChargeAmount',[CaretakerController::class,'setServiceChargeAmount'])->name('Dashboard.setServiceChargeAmount');
 });
 // Route::middleware(['auth','role:occupant'])->prefix('Dashboard')->group)(function(){
 Route::get('/paid',[OccupantsController::class,'paymentHistory'])->name('paid');
 // });
 Route::middleware(['web','role:occupant'])->prefix('Dashboard')->group(function(){
    Route::get('/paymentHistory',[OccupantsController::class,'getPaymentRecord'])->name('paymentHistory');
+   Route::get('/getBalance',[OccupantsController::class,'getBalance'])->name('getBalance');
+   Route::get('/getAccountNumber',[MpesaController::class,'getAccountNumber'])->name('getAccountNumber');
 });
 
 

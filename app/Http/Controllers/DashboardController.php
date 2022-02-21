@@ -31,6 +31,8 @@ class DashboardController extends Controller
             $value = $request->cookie('token');
           
             return view('occupant.dashboard');
+        }elseif(Auth::user()->hasRole('null')){
+            return redirect('/');
         }else{
             return redirect('/');
         }

@@ -1,10 +1,10 @@
 @extends('auth.template')
     @section('content')
-        <div class="conatiners">
+        <div class="container">
             
                 <form id="loginForm" method="POST" action="{{route('login')}}">
                     @csrf
-                <img src="{{asset('images/smart1.jpeg')}}" style="border-radius: 150px; width:200px;height:200px;" >
+                <img class="text-center" src="{{asset('images/smart1.jpeg')}}" style="border-radius: 150%;margin-left:30%;width:40%; height:35% " >
                 <div class="login-title"><p>SMART ESTATE</p></div>
                     
                     <div class="form-group">

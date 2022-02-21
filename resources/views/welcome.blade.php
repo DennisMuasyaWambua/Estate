@@ -19,6 +19,8 @@
     <!-- app icon -->
     <!-- <link rel="icon" type="{{asset('images/favicon.ico')}}"> -->
     <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}" type="image/x-icon">
+
+    <script src="https://cdn.tailwindcss.com"></script>
 </head> 
 <body style="background-image:url('/images/home.jpg')">
 <div class="container">
@@ -57,7 +59,7 @@
       </nav>
 
       <div class="logo">
-        <img src="/images/smart1.jpeg" height="30%" width="20%" />
+        <img src="/images/smart1.jpeg"style="padding:20px;" height="30%" width="20%" />
       </div>
       <div class="title">
         <p>SMART ESTATE</p>

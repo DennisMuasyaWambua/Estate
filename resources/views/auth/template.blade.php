@@ -18,9 +18,10 @@
     <script  src="https://code.jquery.com/jquery-3.5.1.js"  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="crossorigin="anonymous" ></script>
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}" type="image/x-icon">
 </head>
-<body style="background-image:url('/images/home.jpg');background-size:cover;background-repeat:no-repeat;background-position:center;">
+<body>
     <div id="app">
         <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
             @yield('content')

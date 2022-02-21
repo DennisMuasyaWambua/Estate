@@ -3,12 +3,39 @@
     margin: 0;
     padding: 0;
     font-family: "Kranky", cursive;
+    box-sizing: border-box;
 }
+.container{
+    background-size:cover;
+}
+/* for small devices */
+@media   (max-width: 480px){
+    body{
+        height: 100%;
+        background-position: cover;
+        background-repeat: no-repeat;
+        object-fit: cover;
+        
+    }
+    nav{
+        float: right;
+        padding: 50px;
+        margin-left: 10%;
+        z-index: 1;
+    }
+    .logo img{
+        margin: 10%;
+        z-index: -1;
+        padding:20%;
+    }
+}
+
 body {
-    background-image: url("/images/home.jpg'");
+    background-image: url("/images/home.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    height: 100%;
+   
 }
 .nav {
     float: right;
@@ -90,6 +117,7 @@ img {
     margin: 5px;
 }
 .card {
+    max-width: 100%;
     width: 90%;
     height: 80%;
     position: relative;
@@ -100,12 +128,12 @@ form {
     text-align: center;
     border: 1px solid #fd9904;
     position: relative;
+    max-width: 100%;
     width: 600px;
     height: 650px;
-    left: 300px;
     background: rgba(229, 229, 229, 0.53);
     border-radius: 143px;
-    margin: 50px;
+    margin-left:25%;
 }
 .form-group label {
     font-family: "Kranky", cursive;

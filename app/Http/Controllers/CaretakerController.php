@@ -27,6 +27,13 @@ class CaretakerController extends Controller
       $store = DB::table('caretaker_accounts')->insert(['caretaker_id'=>$id,'account_number'=>$accountNumber,'paybill_number'=>$paybillNumber,"created_at" =>  date('Y-m-d H:i:s'),"updated_at" => date('Y-m-d H:i:s'),]);
       return redirect(route('Dashboard'));
     }
+    //setting the service charge amount
+    public function setServiceChargeAmount(Request $request){
+      $id = Auth::id();
+      $serviceChargeAmount = $request->service_amount;
+      $setAmount = DB::table('caretaker_accounts')->where('caretaker_id','=', $id)->update(['service_charge_amount'=>$serviceChargeAmount]);
+      return redirect(route('Dashboard'));
+    }
 
      public function deleteCaretaker(Request $request){
       //deleting the caretaker by the admin

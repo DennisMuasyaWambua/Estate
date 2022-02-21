@@ -50,6 +50,14 @@
                     <button type="submit " class="btn btn-sm btn-success" style="margin-top:10px">Set Account details</button>
                     
                 </form>
+                <form action="{{route('Dashboard.setServiceChargeAmount')}}" method="POST">
+                    @csrf
+                     <div class="form-group">
+                         <label for="service_amount">Service Charge Amount</label>
+                         <input class="form-control"type="number" name="service_amount" placeholder="service charge amount">
+                     </div>
+                     <button class="btn btn-sm btn-success" type="submit" style="margin-top:10px">Set amount</button>
+                </form>
             <ul>
                     <li class="nav-item"><a href="{{ route('logout') }}" class="nav-link underline"onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a></li>
             </ul>

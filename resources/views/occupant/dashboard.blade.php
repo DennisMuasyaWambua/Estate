@@ -43,7 +43,7 @@
                                      
                                         <th id="receive">Recepient id</th>
                         
-                                        <th id="amount">Amount</th>
+                                        <th id="amt">Amount</th>
                         
                                         <th id="status">Paid at</th>
                                     </thead>
@@ -55,8 +55,13 @@
                         
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <!-- Balance -->
+                        <form action=""method="GET">
+                            <div class="form-group">
+                                <label for="balance">Balance :</label>
+                                <p id="balance"></p>
+                            </div>
+                        </form>
                     </div>
                     </div>
                 </div>
@@ -79,11 +84,11 @@
                                             @csrf
                                             <div class="form-group">
                                                 <label for="phone">Phone</label>
-                                                <input type="number" name="phone" class="form-control" id="phone">
+                                                <input type="number" name="phone" class="form-control" id="phone" placeholder="2547...">
                                             </div>
                                             <div class="form-group">
                                                 <label for="amount">Amount</label>
-                                                <input type="number" name="amount" class="form-control" id="amount">
+                                                <input type="number " name="amount" class="form-control" id="amount">
                                             </div>
                                             <div class="form-group">
                                                 <label for="account">Account</label>
@@ -124,6 +129,7 @@
             document.getElementById('prompt').addEventListener('click',(event)=>{
                 event.preventDefault()
                 
+                
                 const requestBody = {
                     phone: document.getElementById('phone').value,
                     amount: document.getElementById('amount').value,
@@ -131,7 +137,7 @@
                     
                 };
                 
-               
+               console.log(requestBody);    
 
 
                 axios.post('/stkpush',requestBody)
@@ -148,15 +154,16 @@
                     }
                     )
                 .catch(
-                        (error)=>{console.log(error);
+                        (error)=>{console.log(error.data);
                             toastr.error("please check your network");
                         })
-            })
+            });
             document.getElementById('service-charge').addEventListener('click',(event)=>{
                 event.preventDefault();
+                axios.get('Dashboard/getBalance').then((response)=>{console.log('balance :'+response.data);var bal =document.getElementById('balance'); bal.innerHTML+= response.data;}).catch((error)=>{console.log(error)});
                 axios.get('Dashboard/paymentHistory').then((response)=>{
                     //display the data on the table 
-                    //column variables
+                    //column variables 
                     //document.getElementById('history').remove();
                    
                         
@@ -176,7 +183,7 @@
                                             
                                             <th id="receive">Recepient id</th>
                             
-                                            <th id="amount">Amount</th>
+                                            <th id="amt">Amount</th>
                             
                                             <th id="status">Paid at</th>
                                         </thead>

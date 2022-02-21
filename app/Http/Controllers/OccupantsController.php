@@ -90,7 +90,7 @@ class OccupantsController extends Controller
             ])->attachRole('occupant');
 
            $pswd = Password::sendResetLink($request->only(['email']));
-           dd($pswd);
+           
             toastr()->success('Occupant added successfully');
 
 
@@ -193,7 +193,19 @@ class OccupantsController extends Controller
         $paymentsMade = DB::table('occupant_payments')->select('receipt_id','amount','created_at')->where('sender_id','=',$id)->get();
         return $paymentsMade;
     }
-    
+    //calculate the total anual amount
+    public function getBalance(){
+        $email = Auth::user()->email;
+        $id = DB::table('occupants')->select('caretakerId')->where('email','=',$email)->value('id');
+        $monthly_amount = DB::table('caretaker_accounts')->select('service_charge_amount')->where('caretaker_id','=', $id)->value('service_charge_amount');
+        $yearly_amount = $monthly_amount*12;
+        
+        //calculating someones balance
+        $sender_id = DB::table('occupants')->select('id')->where('email','=',$email)->value('id');
+        $amount_paid = DB::table('occupant_payments')->select('amount')->where('sender_id','=',$sender_id)->sum('amount');
+        $balance = $yearly_amount-$amount_paid;
+        return $balance;
+    }
     public function paymentHistory(){
         $email = Auth::user()->email;
         $id = DB::table('occupants')->select('id')->where('email','=',$email)->value('id');
