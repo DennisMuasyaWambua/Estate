@@ -48,7 +48,7 @@ class MpesaController extends Controller
             'TransactionDesc' => $request->account
           );
           $url = '/stkpush/v1/processrequest';
-               
+                
           $response = $this->makeHttp($url, $curl_post_data);
           $data = json_decode($response,true);
           $checkout = $data['CheckoutRequestID'];
