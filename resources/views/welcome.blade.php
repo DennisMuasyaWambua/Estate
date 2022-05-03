@@ -7,7 +7,7 @@
     <!-- app name -->
     <title>{{config('app.name','Smart Esate')}}</title>
     <!-- local css -->
-    <link href="{{asset('css/app.css')}}" rel="stylesheet" >
+    <link type="text/css" href="{{asset('/css/app.css')}}" rel="stylesheet" >
     <!-- material icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
     <!-- bootstrap -->
@@ -20,9 +20,9 @@
     <!-- <link rel="icon" type="{{asset('images/favicon.ico')}}"> -->
     <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}" type="image/x-icon">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    
 </head> 
-<body style="background-image:url('/images/home.jpg')">
+<body >
 <div class="container">
       <nav class="nav">
         <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -59,7 +59,7 @@
       </nav>
 
       <div class="logo">
-        <img src="/images/smart1.jpeg"style="padding:20px;" height="30%" width="20%" />
+        <img src="/images/smart1.jpeg"style="padding:20px; border-radius:150%;" height="25%" width="25%" />
       </div>
       <div class="title">
         <p>SMART ESTATE</p>

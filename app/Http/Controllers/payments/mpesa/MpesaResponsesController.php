@@ -37,7 +37,7 @@ class MpesaResponsesController extends Controller
         $prosperity = $request->Body['stkCallback']['ResultDesc'];
        
         
-        $response = json_encode($request->all());
+        $response = json_encode($request->all()); 
         $data = json_decode($response,true);
         $amount = $data['Body']['stkCallback']['CallbackMetadata']['Item'][0]['Value'];
         $receiptNumber = $data['Body']['stkCallback']['CallbackMetadata']['Item'][1]['Value'];

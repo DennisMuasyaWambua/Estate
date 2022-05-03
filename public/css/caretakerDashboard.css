@@ -3,6 +3,15 @@
     margin: 0;
     padding: 0;
 }
+body{
+    width: 100%;
+    height: 100%;
+    background:url('/images/dine.jpg') no-repeat center center fixed;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    background-size: cover;
+}
 #top-bar {
     float: right;
 }
@@ -190,6 +199,100 @@
     z-index: 0;
     transition: transform 0.3s ease-out;
 }
+.summary {
+    width: 220px;
+    height: 221px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    box-shadow: 0 14px 26px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease-out;
+    text-decoration: none;
+    margin-left: 55%;
+    margin-top: 4%;
+}
+.summary-circle{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    border: solid 1px #fd9904;
+    top: 0;
+    z-index: 1;
+    transition: all 0.3s ease-out;
+}
+.summary-circle img{
+    position: inherit;
+    margin: 22px;
+}
+.summary-circle p {
+    z-index: 1000;
+    text-align: center;
+    font-family: "Kranky", cursive;
+    font-size: 21px;
+    color: #fd9904;
+    font-weight: bold;
+}
+.summary:hover {
+    transform: translateY(-5px) scale(1.005) translateZ(0);
+    box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11), 0 5px 25px rgba(253, 153, 4);
+    background: #fd9904;
+}
+
+.summary:hover .summary-overlay {
+    transform: scale(4) translateZ(0);
+}
+.summary:hover .summary-circle {
+    border-color: #fd9904;
+    background: #fd9904;
+    opacity: 1000;
+}
+.summary:hover .summary-circle:after {
+    background: #f0f0f0;
+}
+.summary:hover p {
+    color: #f0f0f0;
+}
+.summary:active {
+    transform: scale(1) translateZ(0);
+    box-shadow: 0 15px 24px rgba(0, 0, 0, 0.11), 0 15px 24px rgba(253, 153, 4);
+}
+.summary p {
+    font-size: 20px;
+    text-decoration: none;
+    z-index: 1000;
+    transition: color 0.3s ease-out;
+}
+.summary-circle:after {
+    content: "";
+    width: 110px;
+    height: 110px;
+    background: #fd9904;
+    border-radius: 50%;
+    top: 7px;
+    left: 7px;
+    transition: opacity 0.3s ease-out;
+}
+.summary-circle img {
+    z-index: 10000;
+    transform: translateZ(0);
+}
+.summary-overlay {
+    width: 118px;
+    position: absolute;
+    height: 118px;
+    border-radius: 50%;
+    background: var(--bg-color);
+    top: 70px;
+    left: 50px;
+    z-index: 0;
+    transition: transform 0.3s ease-out;
+}
 
 #sidebar-navigation {
     width: 0;
@@ -198,7 +301,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #837373;
+    background-color: #ffffffbe ;
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;
@@ -211,7 +314,7 @@
     margin-left: 50px;
     font-size: 30px;
 }
-.deadline{
+#deadline{
     width: 220px;
     height: 210px;
     background: #fff;
@@ -228,7 +331,7 @@
     margin-left: 30%;
     margin-top: 5%;
 }
-.deadline a{
+#deadline a{
     text-decoration: none;
 }
 .deadline-circle {
@@ -253,36 +356,36 @@
     color: #ED1656;
     font-weight: bold;
 }
-.deadline:hover {
+#deadline:hover {
     transform: translateY(-5px) scale(1.005) translateZ(0);
     box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11), 0 5px 25px rgba(237, 22, 86);
     background: #ED1656;
 }
-.deadline:hover .deadline-overlay {
+#deadline:hover .deadline-overlay {
     transform: scale(4) translateZ(0);
 }
-.deadline:hover .deadline-circle {
+#deadline:hover .deadline-circle {
     border-color: #ED1656;
     background: #ED1656;
     opacity: 1000;
 }
-.deadline:hover .deadline-circle:after {
+#deadline:hover .deadline-circle:after {
     background: #f0f0f0;
 }
-.deadline:hover p {
+#deadline:hover p {
     color: #f0f0f0;
 }
-.deadline:active {
+#deadline:active {
     transform: scale(1) translateZ(0);
     box-shadow: 0 15px 24px rgba(0, 0, 0, 0.11), 0 15px 24px rgba(237, 22, 86);
 }
-.deadline p {
+#deadline p {
     font-size: 20px;
     text-decoration: none;
     z-index: 1000;
     transition: color 0.3s ease-out;
 }
-.deadline-circle:after {
+#deadline-circle:after {
     content: "";
     width: 110px;
     height: 110px;
@@ -292,7 +395,7 @@
     left: 7px;
     transition: opacity 0.3s ease-out;
 }
-.deadline-circle img {
+#deadline-circle img {
     z-index: 10000;
     transform: translateZ(0);
 }

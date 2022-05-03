@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\payments\mpesa;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Session;
 use App\Models\Occupant;
 use App\Models\Payments;
+use Illuminate\Http\Request;
+use App\Models\occupant_payments;
+use Illuminate\Support\Facades\DB;
+use AfricasTalking\SDK\AfricasTalking;
 
-use Session;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class MpesaController extends Controller
 {
@@ -43,7 +45,7 @@ class MpesaController extends Controller
             'PartyA' => $request->phone,
             'PartyB' => env('MPESA_SHORTCODE'),
             'PhoneNumber' => $request->phone,
-            'CallBackURL' => env('MPESA_TEST_URL').'/api/stkpush',
+            'CallBackURL' => env('MPESA_TEST_URL').'/api/stkPush',
             'AccountReference' => $request->account,
             'TransactionDesc' => $request->account
           );
@@ -72,11 +74,13 @@ class MpesaController extends Controller
 
     }
     public function getPayments(){
-        $payments = DB::table('occupant_payments')->count();
+        
+        $pay = occupant_payments::where('recepient_id',Auth::id())->orderBy('sender_id')->count();
+        $payments = DB::table('payments')->where('status','=','paid')->where('recepient_id','=',Auth::id())->count();  
         return $payments;
    }
    public function getPendingpayments(){
-    $payments = DB::table('payments')->select('status')->where('status','=','pending')->count();
+    $payments = DB::table('payments')->select('status')->where('status','=','pending')->where('recepient_id','=',Auth::id())->count();
     return $payments;
    }
     //simulate transaction
@@ -122,8 +126,25 @@ class MpesaController extends Controller
         return $curl_response;
     }
     public function getAccounts(){
-        $payments = DB::table('occupant_payments')->count();
-        $pendingPayments = DB::table('payments')->select('status')->where('status','=','pending')->count();
+        $payments = DB::table('occupant_payments')->where('recepient_id','=',Auth::id())->groupBy('sender_id')->count();
+        $pendingPayments = DB::table('payments')->select('status')->where('status','=','pending')->where('recepient_id','=',Auth::id())->groupBy('sender_id')->count();
         return $accounts= array('paid'=>$payments,'unpaid'=>$pendingPayments);
+    }
+    public function sendSms(){
+        $username = 'sandbox'; // use 'sandbox' for development in the test environment
+        $apiKey   = '56fca69db7d375e2764869c1ee58a8ac27298671c41cb2d15d1c0114db79a8e7'; // use your sandbox app API key for development in the test environment
+        $AT       = new AfricasTalking($username, $apiKey);
+
+        // Get one of the services
+        $sms      = $AT->sms();
+
+        // Use the service
+        $result   = $sms->send([
+            'to'      => '+254720523299',
+            'message' => 'Hello World!'
+        ]);
+        dd($result);
+
+        print_r($result);
     }
 }

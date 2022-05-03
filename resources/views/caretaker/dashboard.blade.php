@@ -2,11 +2,16 @@
    
     @section('content')
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('datatable/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset('sweetalert2/sweetalert2.min.css')}}">
     <link rel="stylesheet" href="{{asset('toastr/toastr.min.css')}}">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+    <!-- DATATABLES -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+   <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    
+    
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="40"
@@ -69,57 +74,76 @@
     </div>
    
                 
-           
-            <div class="cards">
-                <div id="occupant">
-                    <a
-                        class="occupancy"
-                        href="#occupancyModal"
-                        data-bs-toggle="modal"
-                        data-bs-target="#occupancyModal"
-                    >
-                    <div class="occupancy-overlay"></div>
-                    <div class="occupancy-circle">
-                    <img src="{{asset('images/house.png')}}" alt="" />
-                    <p>Occupancy</p>
-                    </div>
-                    </a>
-                </div>
-
-                
-                <div id="service-charge">
-                    <a
-                        href="#service-charge"
-                        class="serviceCharge"
-                        data-bs-toggle="modal"
-                        data-bs-target="#serviceChargePaymentData"
-                    >
-                        <div class="accounts-overlay"></div>
-                        <div class="accounts-circle">
-                        <img src="{{asset('images/rent.png')}}" alt="" />
-                        <p>Service charge</p>
-                        </div>  
-                    </a>
-                </div>
-
-                <div class="deadline">
-                    <a
-                        class="deadline-card"
-                        href="#billsModal"
-                        data-bs-toggle="modal"
-                        data-bs-target="#dead"
-                    >
-                        <div class="deadline-overlay"></div>
-                        <div class="deadline-circle">
-                        <img src="{{asset('images/bank.png')}}" alt="" />
-                        <p>Payment Date</p>
+           <section class="md:h-full flex items-center">
+               <div class="flex flex-wrap -m-4">
+                <div class=" container px-5 py-24 mx-auto" >
+                    <div  class="" id="occupant">
+                        <a
+                            class="occupancy"
+                            href="#occupancyModal"
+                            data-bs-toggle="modal"
+                            data-bs-target="#occupancyModal"
+                        >
+                        <div class="occupancy-overlay"></div>
+                        <div class="occupancy-circle">
+                        <img src="{{asset('images/house.png')}}" alt="" />
+                        <p>Occupancy</p>
                         </div>
-                    </a>
-                </div>
-               
+                        </a>
+                    </div>
 
-            </div>
-            
+                    
+                    <div  class="" id="service-charge">
+                        <a
+                            href="#service-charge"
+                            class="serviceCharge"
+                            data-bs-toggle="modal"
+                            data-bs-target="#serviceChargePaymentData"
+                        >
+                            <div class="accounts-overlay"></div>
+                            <div class="accounts-circle">
+                            <img src="{{asset('images/rent.png')}}" alt="" />
+                            <p>Service charge</p>
+                            </div>  
+                        </a>
+                    </div>
+
+                    <div  class=""  id="summary">
+                        <a
+                            href="{{route('Dashboard.balances')}}"
+                            class="summary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#summaryPayment"
+                        >
+                            <div class="summary-overlay"></div>
+                            <div class="summary-circle">
+                            <img src="{{asset('images/summary.png')}}" alt="" />
+                            <p>Balances</p>
+                            </div>  
+                        </a>
+                    </div>
+
+                    <div id="deadline"class="" >
+                        <a
+                            class="deadline-card"
+                            href="#billsModal"
+                            data-bs-toggle="modal"
+                            data-bs-target="#dead"
+                        >
+                            <div class="deadline-overlay"></div>
+                            <div class="deadline-circle">
+                            <img src="{{asset('images/bank.png')}}" alt="" />
+                            <p>Payment Date</p>
+                            </div>
+                        </a>
+                        
+                    </div>
+                
+
+                </div>
+                
+            </section>
+
 
              <!-- Modals for the various cards -->
              <!-- Modal -->
@@ -133,8 +157,8 @@
                 </div>
                 <div class="modal-body">
                         <div id="table">
-                                
-                                    <table class="table">
+                                 
+                                    <table id="myTable" class="display" style="width:100%;">
                                         <thead class="table-dark">
                                             <a class="btn btn-sm btn-success"role="button"style="float:right;margin-bottom:5px;padding:5px;"data-bs-toggle="modal"data-bs-target="#addOccupant">create occupant</a>
                                             <tr>
@@ -148,11 +172,11 @@
                                                 <th scope="col">Actions</th>
                                             </tr>
                                         </thead>
-                                        <tbody class="table-dark">
+                                        <tbody >
                                                 
-                                                @foreach($occupant as $Occupant)
+                                        @foreach($occupant as $Occupant)
                                                 
-                                                <tr>
+                                                <tr >
                                                     <td>{{$Occupant['id']}}</td>
                                                     <td>{{$Occupant['name']}}</td>
                                                     <td>{{$Occupant['email']}}</td>
@@ -255,7 +279,7 @@
                                                     </div>
                                                     
                                                 </tr>
-                                            @endforeach
+                                        @endforeach
                                             <!-- modals -->
                                                     <!-- update modal -->
                                                    
@@ -266,7 +290,7 @@
                                         
                                     </table>
                                     
-                                    {{$occupant->links()}}
+                                   
                                
                             </div>
                         </div>
@@ -420,26 +444,82 @@
             </div>
 
             <!-- payment date setter -->
-            <div class="modal fade" id="dead" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="dead" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                        <div class="mb-3">
+                            <label for="scheduled-date" class="col-form-label">Schedule date to send message:</label>
+                            <input type="text" class="form-control" id="scheduled-date">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Schedule message</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment summary -->
+            <div class="modal fade" id="summaryPayment" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Deadline Setter </h5>
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Payment Summary </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            
+                            <table id="paymentSummary" class="display" width="100%">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col">Estate</th>
+                                        <th scope="col">Block Number</th>
+                                        <th scope="col">Flat Number</th>
+                                        <th scope="col">Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        @foreach ($balances as $balance )
+                                            <tr>
+                                                <td>{{$balance['name']}}</td>
+                                                <td>{{$balance['phone']}}</td>
+                                                <td>{{$balance['estate']}}</td>
+                                                <td>{{$balance['blockNumber']}}</td>
+                                                <td>{{$balance['flatNumber']}}</td>
+                                                <td>{{$balance['amount']}}</td>
+                                            </tr>
+                                        @endforeach
+                                </tbody>
+                            </table>
                                 
                         </div>
                         
                     </div>
                 </div>
             </div>
-            <script src="{{asset('datatable/js/jquery.dataTables.min.js')}}"></script>
-            <script src="{{asset('datatable/js/dataTables.bootstrap4.min.js')}}"></script>
+            
             <script src="{{asset('sweetalert2/sweetalert2.min.js')}}"></script>
             <script src="{{ asset('toastr/toastr.min.js') }}"></script>
-            <script src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
+           
+            <script>
+                 $(document).ready( function () {
+                        $('#myTable').DataTable();
+                    } );
+            </script>
+            
                 
             <script type="text/javascript">
            //toastr.options.preventDuplicates = true;
@@ -516,6 +596,7 @@
                             console.log(result);   
                         }
                     });
+                   
 
                     //creating a chart to represent the data 
                     $.ajax({
@@ -528,13 +609,13 @@
                             let mychart = document.getElementById('mychart').getContext('2d');
                             let popChart = new Chart(mychart,{
                                 type:'pie',
-                                data:{
+                                data :{
                                     labels:['paid','unpaid'],
                                     datasets:[{
                                         label:'Accounts',
                                         data:[data.paid,data.unpaid],
                                         backgroundColor:['green','red']
-                                    }],
+                                    }]
                                    
                                 },
                                 options:{
@@ -542,16 +623,19 @@
                                         display:true,
                                         text:'Service Charge  accounts'
                                     }
-                                }
+                                },
                             });
+                            
                         },
                         error:function(result){
                             console.log(result);
                         }
+                        
                     });
             });
       
                    
         </script>
+        
                 
     @endsection

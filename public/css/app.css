@@ -31,10 +31,11 @@
 }
 
 body {
-    background-image: url("/images/home.jpg");
+    background: url("/images/home.jpg") no-repeat center center fixed;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
     background-size: cover;
-    background-repeat: no-repeat;
-    height: 100%;
    
 }
 .nav {
@@ -286,6 +287,7 @@ a:hover {
     margin-left: 55%;
     top: 22%;
 }
+
 .bills {
     width: 220px;
     height: 221px;
@@ -622,6 +624,7 @@ a:hover {
     z-index: 0;
     transition: transform 0.3s ease-out;
 }
+
 /* the internal cards for the cards  */
 .service-charge {
     width: 220px;
@@ -643,6 +646,7 @@ a:hover {
     transform-style: preserve-3d;
     perspective: 1000px;
 }
+
 
 .services-charge-circle {
     width: 100px;
@@ -720,4 +724,3 @@ a:hover {
     z-index: 0;
     transition: transform 0.3s ease-out;
 }
-

@@ -19,8 +19,23 @@ class DashboardController extends Controller
         }elseif(Auth::user()->hasRole('landlord')){
             return view('landlord.dashboard');
         }elseif(Auth::user()->hasRole('caretaker')){
-            $occupant = Occupant::paginate(5);
-            return view('caretaker.dashboard',compact('occupant'));
+
+                 $id = Auth::id();
+                 //dd($id);
+                $occupant = Occupant::where('caretakerId',$id)->get();
+                
+         
+       
+                $monthly_amount = DB::table('caretaker_accounts')->select('service_charge_amount')->where('caretaker_id','=', $id)->value('service_charge_amount');
+                $yearly_amount = $monthly_amount*12;
+                
+                //calculating someones balance
+                $occupants_balances = DB::table('occupant_payments')->join('occupants','occupant_payments.sender_id','=','occupants.id')->join('caretaker_accounts','occupant_payments.recepient_id','=','caretaker_accounts.caretaker_id')->select('occupants.name','occupants.phone','occupants.estate','occupants.blockNumber','occupants.flatNumber',DB::raw("'$yearly_amount'-occupant_payments.amount as amount"))->where('occupant_payments.recepient_id','=',$id)->where('occupant_payments.amount','<',$yearly_amount)->groupBy('occupants.id')->get();
+                //dd($occupants_balances);
+                $balances= json_decode($occupants_balances,true);
+
+                return view('caretaker.dashboard',compact('occupant','balances'));
+          
         }elseif(Auth::user()->hasRole('tenant')){
             return view('tenant.dashboard');
         }elseif(Auth::user()->hasRole('user')){

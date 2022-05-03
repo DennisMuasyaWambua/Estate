@@ -38,14 +38,18 @@ Route::get('/auth/forgot-password',function(){return view('auth.forgot-password'
 Route::post('/token',[ApiController::class,'authenticate']);
 //delta route to all other pages 
 Route::get('/Dashboard',[DashboardController::class,'index'])->name('Dashboard');
+Route::get('/sendSms', [MpesaController::class,'sendSms'])->name('sendSms');
 
 Route::middleware(['web','role:caretaker'])->prefix('Dashboard')->group(function(){
     Route::get('/allOccupants',[OccupantsController::class,'index'])->name('Dashboard.allOccupants');
+    Route::get('/occupantList',[OccupantsController::class,'list'])->name('Dashboard.occupantList');
     Route::post('/createOccupant',[OccupantsController::class,'store'])->name('Dashboard.createOccupant');
     Route::post('/deleteOccupant/{id}',[OccupantsController::class,'destroy'])->name('Dashboard.deleteOccupant');
     Route::post('/updateOccupant/{id}',[OccupantsController::class,'update'])->name('Dashboard.updateOccupant');
     Route::get('/editOccupant/{id}',[OccupantsController::class,'edit'])->name('Dashboard.editOccupant');
+    Route::get('/balances',[OccupantsController::class,'balances'])->name('Dashboard.balances');
     Route::get('/payments',[MpesaController::class,'getPayments'])->name('Dashboard.payments');
+    
     Route::get('/pending',[MpesaController::class,'getPendingpayments'])->name('Dashboard.pending');
     Route::get('/accounts',[MpesaController::class,'getAccounts'])->name('accounts');
     Route::post('/accountDetails',[CaretakerController::class,'getAccountDetails'])->name('Dashboard.accountDetails');

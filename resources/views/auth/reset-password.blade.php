@@ -7,7 +7,7 @@
             </div>
         @endif
             
-            <form method="POST" action="{{route('password.request')}}">
+            <form method="POST" action="{{route('password.update')}}">
                 @csrf
                 <input type="hidden" name="token" value="{{$request->route('token')}}">
             <img src="{{asset('images/smart1.jpeg')}}" style="border-radius: 150px; width:200px;height:200px;" >
@@ -45,7 +45,7 @@
             </div>
                         
                         <input name="login" id="login" class="btn btn-block login-btn mb-4" type="submit" value="Update">
-                        <a id="register-link" href="/register"><small>Joining us today?</small></a>
+                        <a id="register-link" href="/register"><small>Don't have an account?</small></a>
                
             </form>
        

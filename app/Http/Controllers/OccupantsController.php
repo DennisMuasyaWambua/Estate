@@ -26,6 +26,11 @@ class OccupantsController extends Controller
       return route('Dashboard');
     }
 
+    public function list(){
+        $occupant = Occupant::paginate(5);
+        return view('caretaker.occupants',compact('occupant'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -91,7 +96,7 @@ class OccupantsController extends Controller
 
            $pswd = Password::sendResetLink($request->only(['email']));
            
-            toastr()->success('Occupant added successfully');
+            
 
 
            
@@ -213,6 +218,17 @@ class OccupantsController extends Controller
         // return $paymentsMade;
         $o_id = PaymentHistory::all();
         dd($o_id);
+    }
+    public function balances(){
+          $id = Auth::id();
+       
+        $monthly_amount = DB::table('caretaker_accounts')->select('service_charge_amount')->where('caretaker_id','=', $id)->value('service_charge_amount');
+        $yearly_amount = $monthly_amount*12;
+        
+        //calculating someones balance
+        $occupants_balances = DB::table('occupant_payments')->join('occupants','occupant_payments.sender_id','=','occupants.id')->select('occupants.name','occupants.blockNumber','occupants.flatNumber','occupant_payments.amount')->where('occupant_payments.recepient_id','=',$id)->where('occupant_payments.amount','<',$yearly_amount)->get();
+       
+        return view('caretaker.dashboard',compact('occupants_balances'));
     }
 
   

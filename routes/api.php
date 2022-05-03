@@ -18,7 +18,7 @@ use App\Http\Controllers\ApiController;
 */
 Route::post('/validation',[MpesaResponsesController::class,'validation']);
 Route::post('/confirmation',[MpesaResponsesController::class,'confirmation']);
-Route::post('/stkpush',[MpesaResponsesController::class,'stkPush']);
+Route::post('/stkPush',[MpesaResponsesController::class,'stkPush']);
 Route::post('/token',[ApiController::class,'authenticate']);
 Route::post('/register',[MpesaResponsesController::class,'registerUser']);
 Route::group(['middleware' => ['jwt.verify']], function(){

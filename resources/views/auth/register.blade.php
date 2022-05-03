@@ -1,14 +1,14 @@
 @extends('auth.template')
     @section('content')
-        <form class="form-floating" method="POST" action="{{route('register')}}">
+        <form id="registration-form-main" class="form-floating" method="POST" action="{{route('register')}}">
             @csrf
-            <img src="{{asset('images/smart1.jpeg')}}" style="border-radius: 150px; width:100px;height:100px;" >
+            <img src="{{asset('images/smart1.jpeg')}}" style="border-radius: 150px; width:100px;height:100px; margin-left:43%" >
             <div class="login-title">
                 <p>SMART ESTATE</p>
                 <p>Create your account</p>
             </div>
                     
-            <div class="form-group">
+            <div class="form-group ">
                 <label class="form-control" for="name"  id="name" >Name</label>
                 <input name="name" type="text" class="form-control is-invalid" placeholder="Name"  autofocus> 
                 @error('name')
