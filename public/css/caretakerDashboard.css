@@ -314,7 +314,7 @@ body{
     margin-left: 50px;
     font-size: 30px;
 }
-#deadline{
+.deadline-card{
     width: 220px;
     height: 210px;
     background: #fff;
@@ -331,7 +331,7 @@ body{
     margin-left: 30%;
     margin-top: 5%;
 }
-#deadline a{
+.deadline-card a{
     text-decoration: none;
 }
 .deadline-circle {
@@ -356,36 +356,36 @@ body{
     color: #ED1656;
     font-weight: bold;
 }
-#deadline:hover {
+.deadline-card:hover {
     transform: translateY(-5px) scale(1.005) translateZ(0);
     box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11), 0 5px 25px rgba(237, 22, 86);
     background: #ED1656;
 }
-#deadline:hover .deadline-overlay {
+.deadline-card:hover .deadline-overlay {
     transform: scale(4) translateZ(0);
 }
-#deadline:hover .deadline-circle {
+.deadline-card:hover .deadline-circle {
     border-color: #ED1656;
     background: #ED1656;
     opacity: 1000;
 }
-#deadline:hover .deadline-circle:after {
+.deadline-card:hover .deadline-circle:after {
     background: #f0f0f0;
 }
-#deadline:hover p {
+.deadline-card:hover p {
     color: #f0f0f0;
 }
-#deadline:active {
+.deadline-card:active {
     transform: scale(1) translateZ(0);
     box-shadow: 0 15px 24px rgba(0, 0, 0, 0.11), 0 15px 24px rgba(237, 22, 86);
 }
-#deadline p {
+.deadline-card p {
     font-size: 20px;
     text-decoration: none;
     z-index: 1000;
     transition: color 0.3s ease-out;
 }
-#deadline-circle:after {
+.deadline-circle:after {
     content: "";
     width: 110px;
     height: 110px;
@@ -395,7 +395,7 @@ body{
     left: 7px;
     transition: opacity 0.3s ease-out;
 }
-#deadline-circle img {
+.deadline-circle img {
     z-index: 10000;
     transform: translateZ(0);
 }
@@ -410,25 +410,7 @@ body{
     z-index: 0;
     transition: transform 0.3s ease-out;
 }
-.service-charge{
-    width: 220px;
-    height: 221px;
-    background: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 14px 26px rgba(0, 0, 0, 0.04);
-    transition: all 0.3s ease-out; 
-    text-decoration: none;
-    margin-left: 20%;
-    margin-top: 10%;   
-    background-repeat:none;
-}
+
 .service-circle{
     width: 100px;
     height: 100px;
@@ -575,4 +557,31 @@ body{
     font-size: 20px;
     z-index: 1000;
     transition: color 0.3s ease-out;
+}
+@media only screen and (max-width: 600px){
+    
+    .occupancy{
+        width: 70%;
+        margin-top:10%;
+        margin-left: 10%;
+             
+    }
+    .serviceCharge{
+        width: 70%;
+        margin-top: 40%;
+        margin-left: 10%;
+       
+    }
+    .summary{
+        width: 70%;
+        margin-left: 10%; 
+        margin-top: 50%;
+       
+    }
+    .deadline-card{
+        width:70%;
+        margin-top:95%;
+        margin-left: 10%;
+      
+    }
 }

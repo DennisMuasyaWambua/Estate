@@ -72,77 +72,92 @@
             <form id="logout-form" method="POST" action="{{route('logout')}}" >@csrf</form>
         @endauth
     </div>
-   
-                
-           <section class="md:h-full flex items-center">
-               <div class="flex flex-wrap -m-4">
-                <div class=" container px-5 py-24 mx-auto" >
-                    <div  class="" id="occupant">
-                        <a
-                            class="occupancy"
-                            href="#occupancyModal"
-                            data-bs-toggle="modal"
-                            data-bs-target="#occupancyModal"
-                        >
-                        <div class="occupancy-overlay"></div>
-                        <div class="occupancy-circle">
-                        <img src="{{asset('images/house.png')}}" alt="" />
-                        <p>Occupancy</p>
-                        </div>
-                        </a>
-                    </div>
 
-                    
-                    <div  class="" id="service-charge">
-                        <a
-                            href="#service-charge"
-                            class="serviceCharge"
-                            data-bs-toggle="modal"
-                            data-bs-target="#serviceChargePaymentData"
-                        >
-                            <div class="accounts-overlay"></div>
-                            <div class="accounts-circle">
-                            <img src="{{asset('images/rent.png')}}" alt="" />
-                            <p>Service charge</p>
-                            </div>  
-                        </a>
-                    </div>
-
-                    <div  class=""  id="summary">
-                        <a
-                            href="{{route('Dashboard.balances')}}"
-                            class="summary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#summaryPayment"
-                        >
-                            <div class="summary-overlay"></div>
-                            <div class="summary-circle">
-                            <img src="{{asset('images/summary.png')}}" alt="" />
-                            <p>Balances</p>
-                            </div>  
-                        </a>
-                    </div>
-
-                    <div id="deadline"class="" >
-                        <a
-                            class="deadline-card"
-                            href="#billsModal"
-                            data-bs-toggle="modal"
-                            data-bs-target="#dead"
-                        >
-                            <div class="deadline-overlay"></div>
-                            <div class="deadline-circle">
-                            <img src="{{asset('images/bank.png')}}" alt="" />
-                            <p>Payment Date</p>
+    <div class="column">
+        <div class="occupant-card">
+                        <div  class=" " id="occupant">
+                            <a
+                                class="occupancy"
+                                href="#occupancyModal"
+                                data-bs-toggle="modal"
+                                data-bs-target="#occupancyModal"
+                            >
+                            <div class="occupancy-overlay"></div>
+                            <div class="occupancy-circle">
+                            <img src="{{asset('images/house.png')}}" alt="" />
+                            <p>Occupancy</p>
                             </div>
-                        </a>
-                        
-                    </div>
-                
+                            </a>
+                        </div>
+         </div>
+         <div class="service-card">
+                        <div  class="" id="service-charge">
+                            <a
+                                href="#service-charge"
+                                class="serviceCharge"
+                                data-bs-toggle="modal"
+                                data-bs-target="#serviceChargePaymentData"
+                            >
+                                <div class="accounts-overlay"></div>
+                                <div class="accounts-circle">
+                                <img src="{{asset('images/rent.png')}}" alt="" />
+                                <p>Service charge</p>
+                                </div>  
+                            </a>
+                        </div>
+         </div>
+         <div class="summary-card">
+            <div  class=""  id="summary">
+                <a
+                    href="{{route('Dashboard.balances')}}"
+                    class="summary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#summaryPayment"
+                >
+                    <div class="summary-overlay"></div>
+                    <div class="summary-circle">
+                    <img src="{{asset('images/summary.png')}}" alt="" />
+                    <p>Balances</p>
+                    </div>  
+                </a>
+            </div>
+         </div>
+         
+                        <div class="deadline" >
+                            <a
+                                class="deadline-card"
+                                href="#billsModal"
+                                data-bs-toggle="modal"
+                                data-bs-target="#dead"
+                            >
+                                <div class="deadline-overlay"></div>
+                                <div class="deadline-circle">
+                                <img src="{{asset('images/bank.png')}}" alt="" />
+                                <p>Payment Date</p>
+                                </div>
+                            </a>
+                            
+                        </div>
+        
+    </div>
+   
+         
 
-                </div>
+                          
+                        
+                   
+                        
+                       
+               
+                 
+                        
+
+                        
+                   
+               
+            
                 
-            </section>
+          
 
 
              <!-- Modals for the various cards -->
