@@ -65,7 +65,7 @@
                 <small>
                     <p id="login-card-footer-text" class="login-card-footer-text">
                          <a href="{{ route('login') }}" class="text-reset"id="register-login">Login here</a></br>
-                         <a href="#!"id ="forgot-password-link" class="forgot-password-link">Forgot password?</a>
+                         <a href="{{ route('login') }}"id ="forgot-password-link" class="forgot-password-link">Forgot password?</a>
                     </p>
                 </small>
             </div>
