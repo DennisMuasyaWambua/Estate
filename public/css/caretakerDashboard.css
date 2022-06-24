@@ -564,13 +564,42 @@ body{
         width: 70%;
         margin-top:10%;
         margin-left: 10%;
-             
+        
     }
     .serviceCharge{
         width: 70%;
         margin-top: 40%;
         margin-left: 10%;
+        margin-bottom: 10%;
+    }
+    .summary{
+        width: 70%;
+        margin-left: 10%; 
+        margin-top: 50%;
        
+    }
+    .deadline-card{
+        width:70%;
+        margin-top:95%;
+        margin-left: 10%;
+      
+    }
+}
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+    .occupancy{
+        width: 70%;
+        margin-top:10%;
+        margin-left: 10%;
+        
+    }
+    .serviceCharge{
+        width: 70%;
+        margin-top: 40%;
+        margin-left: 10%;
+        margin-bottom: 10%;
     }
     .summary{
         width: 70%;

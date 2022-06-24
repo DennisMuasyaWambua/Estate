@@ -5,6 +5,7 @@
     font-family: "Kranky", cursive;
     box-sizing: border-box;
 }
+
 .container{
     background-size:cover;
 }
@@ -36,6 +37,10 @@ body {
     -moz-background-size:cover;
     -o-background-size:cover;
     background-size: cover;
+    height: 100%;
+    background-position: cover;
+    background-repeat: no-repeat;
+    object-fit: cover;
    
 }
 .nav {
@@ -723,4 +728,76 @@ a:hover {
     left: 50px;
     z-index: 0;
     transition: transform 0.3s ease-out;
+}
+/* for iphones */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+ {
+    
+    #login-title p{
+        margin-top: 1%;
+        font-size: 16px;
+    } 
+    .form-floating{
+        margin-left: 1%;
+        margin-top: 20%;
+        width: 100%;
+        height: 100%;
+    }
+    #smart-image-logo{
+        margin-bottom: 2%;
+        margin-left: 10%;
+        margin-top: 1%;
+    }
+    .form-group input{
+        width: 70%;
+        border-radius:5%;
+        margin-bottom: 2%;
+    }
+    #name{
+        display: none;
+    }
+    #email{
+        display: none;
+    }
+    #password{
+        display: none;
+    }
+    #password-confirm{
+        display: none;
+    }
+    #role_id{
+        font-size:16px;
+    }
+    #register{
+        width: 50%;
+        height: 7%;
+        left: 25%;
+        font-size: 16px;
+        padding: 5px;
+        text-align: center;
+    }
+    #forgot-password-link{
+        padding: 30px;
+        font-size: 16px;
+    }
+  
+    #login-card-footer-text{
+        font-size: 10px;
+        margin: 10%;
+        margin-left: 5%;
+    }
+    #name-input{
+        height: 20px;
+    }
+    #email-input{
+        height: 20px;
+    }
+    #password-input{
+        height: 20px;
+    }
+    #confirmation-input{
+        height: 20px;
+    }
 }
